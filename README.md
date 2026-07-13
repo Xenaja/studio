@@ -1,6 +1,6 @@
 # studio
 
-English-language site for Ksenia Telegina — marketing + development in one pair of hands
+English-language site for Ksenia — marketing + development under one roof
 (landing pages, chatbots, apps). Targeted at an international audience.
 
 - **Live:** https://xenaja.github.io/studio/

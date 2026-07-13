@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FuelMonitor – fuel-control platform · case · Ksenia Telegina</title>
+<meta name="description" content="Case study: the FuelMonitor platform. We merged two independent accounting systems with no shared key into a single picture – entity resolution on dirty data, multi-tenant, 350+ automated tests, in production.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0f0e0c; --bg-2:#14120f; --panel:#181610; --panel-2:#1d1b14;
+    --line:rgba(94,234,212,0.12); --line-soft:rgba(245,240,225,0.08);
+    --ink:#f3efe2; --ink-soft:#b6b0a0; --ink-faint:#7d776a;
+    --accent:#5eead4; --accent-dim:#3fbfac; --accent-glow:rgba(94,234,212,0.42);
+    --display:'Familjen Grotesk',system-ui,sans-serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --container:880px; --radius:16px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.7; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:var(--container); margin:0 auto; padding:0 22px; }
+  a { color:var(--accent); }
+  .back { display:inline-block; margin:32px 0 8px; font-family:var(--mono); font-size:0.85rem; color:var(--ink-faint); text-decoration:none; }
+  .back:hover { color:var(--accent); }
+
+  .eyebrow { font-family:var(--mono); font-size:0.72rem; letter-spacing:0.05em; color:var(--accent); }
+  .eyebrow::before { content:"// "; opacity:0.6; }
+  .tags { display:flex; flex-wrap:wrap; gap:7px; margin:14px 0 0; }
+  .tags span { font-family:var(--mono); font-size:0.66rem; color:var(--accent); border:1px solid var(--line); border-radius:100px; padding:4px 10px; }
+
+  h1 { font-family:var(--display); font-weight:600; font-size:clamp(1.9rem,5vw,2.9rem); line-height:1.1; letter-spacing:-0.01em; margin:18px 0 0; }
+  .sub { font-family:var(--display); color:var(--ink-soft); font-size:1.15rem; margin-top:10px; }
+  .meta { display:grid; gap:8px; margin-top:22px; font-family:var(--mono); font-size:0.78rem; color:var(--ink-soft); }
+  .meta b { color:var(--ink); font-weight:500; }
+
+  section.case { padding:38px 0; border-bottom:1px solid var(--line-soft); }
+  section.case:last-of-type { border-bottom:none; }
+  h2 { font-family:var(--display); font-weight:600; font-size:1.45rem; margin-bottom:14px; }
+  p { color:var(--ink-soft); margin-bottom:14px; }
+  p strong, li strong { color:var(--ink); font-weight:600; }
+  .lead-p { font-size:1.08rem; }
+
+  /* технические вызовы */
+  .challenges { list-style:none; display:grid; gap:16px; }
+  .challenges li { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 20px; }
+  .challenges b { display:block; color:var(--ink); font-size:1.05rem; margin-bottom:7px; }
+  .challenges b .n { font-family:var(--mono); color:var(--accent); font-size:0.82rem; margin-right:9px; }
+  .challenges p { margin:0; font-size:0.95rem; }
+
+  /* результаты – чеклист */
+  .checks { list-style:none; display:grid; gap:11px; }
+  .checks li { padding-left:28px; position:relative; color:var(--ink-soft); }
+  .checks li::before { content:"✓"; position:absolute; left:0; color:var(--accent); font-weight:700; }
+
+  .means { list-style:none; display:grid; gap:12px; }
+  .means li { padding-left:22px; position:relative; color:var(--ink-soft); }
+  .means li::before { content:"▸"; position:absolute; left:0; color:var(--accent); }
+
+  .shots { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; align-items:start; }
+  .shots figure { margin:0; }
+  .shots img { width:100%; display:block; border:1px solid var(--line); border-radius:14px; box-shadow:0 14px 34px -18px rgba(0,0,0,0.85); }
+  .shots figcaption { margin-top:8px; font-family:var(--mono); font-size:0.72rem; color:var(--ink-faint); text-align:center; }
+  @media (min-width:640px){ .shots { grid-template-columns:repeat(3,1fr); gap:18px; } }
+
+  .cta { text-align:center; padding:54px 0 72px; }
+  .btn { display:inline-block; font-family:var(--body); font-weight:700; background:var(--accent); color:#06231f; padding:15px 30px; border-radius:12px; text-decoration:none; min-height:48px; }
+  .btn:hover { background:var(--accent-dim); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../index.html#works">← all work</a>
+
+    <header style="padding:8px 0 26px;">
+      <span class="eyebrow">case study · engineering</span>
+      <div class="tags"><span>app</span><span>platform</span><span>integrations</span></div>
+      <h1>FuelMonitor – fuel-control platform</h1>
+      <p class="sub">From product tasks to engineering challenges</p>
+      <div class="meta">
+        <span>Problem class: <b>integrating independent sources · entity resolution with no shared key · multi-tenant · "dirty" data from real equipment</b></span>
+        <span>Stack: <b>Python, Django, background services (watchdog, scheduler), gunicorn + nginx, systemd</b></span>
+        <span>Role: <b>in partnership</b> · Status: <b>in production</b></span>
+      </div>
+    </header>
+
+    <section class="case">
+      <h2>The class of problems this project solves</h2>
+      <p class="lead-p">Many business tasks boil down to one hard pattern: <strong>there are several independent systems, each knows its own part of the truth, and nowhere are those parts brought together.</strong></p>
+      <p>Data arrives in different formats, through different channels, with typos and gaps – and a shared identifier to link them by simply doesn't exist.</p>
+      <p>FuelMonitor is a typical example. Two independent accounting systems: one knows <strong>how much of the resource was dispensed</strong>, the other – <strong>how much actually reached the recipient</strong>. As long as they're apart, the discrepancy can't be proven. We brought them into a single view so the discrepancy shows up automatically for every operation.</p>
+    </section>
+
+    <section class="case">
+      <h2>The technical challenges and how we solved them</h2>
+      <ul class="challenges">
+        <li>
+          <b><span class="n">01</span>Entity resolution with no shared identifier</b>
+          <p>Link records from two systems that have no common key, with "dirty" data – typos, different keyboard layouts, duplicates, an identifier buried inside another field. The solution is a <strong>multi-pass algorithm</strong>: exact match → fuzzy match (typo-tolerant) → probabilistic recovery from indirect signals. The system doesn't silently "swallow" uncertain matches – disputed cases go to an operator for one-click confirmation.</p>
+        </li>
+        <li>
+          <b><span class="n">02</span>Integrations that account for an imperfect real world</b>
+          <p>Two different channels: real-time file exchange (several formats, auto-recovery after failures) and an external API with hard rate limits (request chunking, quota monitoring, distinguishing "no data" from "error"). Each automated channel has a manual fallback in case of failure.</p>
+        </li>
+        <li>
+          <b><span class="n">03</span>Multi-tenancy with guaranteed isolation</b>
+          <p>A single instance serves many clients in a "partner → client" hierarchy. Isolation runs through the whole system at the architecture level – you can't see someone else's data even by editing the address bar. It's verified by dedicated automated tests.</p>
+        </li>
+        <li>
+          <b><span class="n">04</span>Data-quality control as part of the product</b>
+          <p>The system flags suspicious records by rules itself – the operator works through a list of problems instead of reviewing everything. Anomalies and contradictions between sources are surfaced automatically.</p>
+        </li>
+        <li>
+          <b><span class="n">05</span>Performance and reliability at real volumes</b>
+          <p>Batch processing sped up imports by tens of times (critical at thousands of operations a day). Heavy recalculations run only on real changes. Key steps are logged: when investigating incidents, it's always clear where and what happened.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="case">
+      <h2>The result</h2>
+      <ul class="checks">
+        <li>Disparate sources are brought into a single picture – discrepancies show up automatically for every operation.</li>
+        <li>Matching without a shared key works on real dirty data, with built-in manual control of disputed cases.</li>
+        <li>Performance holds up at real volumes; data isolation is guaranteed at the architecture level.</li>
+        <li>350+ automated tests (parsers, algorithms, access control, isolation, end-to-end scenarios), logging, ready for operation on a live server.</li>
+      </ul>
+    </section>
+
+    <section class="case">
+      <h2>How it looks</h2>
+      <div class="shots">
+        <figure><img src="../visual/cases/fuel-1.jpg" alt="FuelMonitor login screen" loading="lazy"><figcaption>Login</figcaption></figure>
+        <figure><img src="../visual/cases/fuel-2.jpg" alt="Fuel-monitoring platform dashboard" loading="lazy"><figcaption>Dashboard</figcaption></figure>
+        <figure><img src="../visual/cases/fuel-3.jpg" alt="Data filters: period, client, source, search" loading="lazy"><figcaption>Data filters</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="case">
+      <h2>What this means for your project</h2>
+      <p>FuelMonitor is one example of the level of complexity we take on. We build web services and platforms end to end – from clear product tasks to the kind where no ready-made solution exists and the architecture and algorithms have to be designed from scratch.</p>
+      <ul class="means">
+        <li><strong>We design architecture</strong> that will withstand growth – multiple clients, data isolation, real volumes, reliability.</li>
+        <li><strong>We invent algorithms for the task</strong> – matching, scoring, gap recovery where no ready-made libraries exist.</li>
+        <li><strong>We take it to production</strong> – with tests, logging and operation on a live server, not "a demo that works on clean data".</li>
+      </ul>
+      <p style="margin-top:16px;">If you have a task – from the routine to the kind others won't take on – let's talk.</p>
+    </section>
+
+    <div class="cta">
+      <a class="btn" href="../index.html#final">Discuss your project</a>
+    </div>
+  </div>
+</body>
+</html>

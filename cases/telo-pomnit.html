@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>"The Body Remembers" – Telegram Mini App · case · Ksenia Telegina</title>
+<meta name="description" content="Case study: a Telegram Mini App for the online body-therapy program 'The Body Remembers'. A body journal, an AI assistant, analytics – a program of Zoom sessions became a product with measurable results.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0f0e0c; --bg-2:#14120f; --panel:#181610; --panel-2:#1d1b14;
+    --line:rgba(94,234,212,0.12); --line-soft:rgba(245,240,225,0.08);
+    --ink:#f3efe2; --ink-soft:#b6b0a0; --ink-faint:#7d776a;
+    --accent:#5eead4; --accent-dim:#3fbfac; --accent-glow:rgba(94,234,212,0.42);
+    --display:'Familjen Grotesk',system-ui,sans-serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --container:880px; --radius:16px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.7; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:var(--container); margin:0 auto; padding:0 22px; }
+  a { color:var(--accent); }
+  .back { display:inline-block; margin:32px 0 8px; font-family:var(--mono); font-size:0.85rem; color:var(--ink-faint); text-decoration:none; }
+  .back:hover { color:var(--accent); }
+
+  .eyebrow { font-family:var(--mono); font-size:0.72rem; letter-spacing:0.05em; color:var(--accent); }
+  .eyebrow::before { content:"// "; opacity:0.6; }
+  .tags { display:flex; flex-wrap:wrap; gap:7px; margin:14px 0 0; }
+  .tags span { font-family:var(--mono); font-size:0.66rem; color:var(--accent); border:1px solid var(--line); border-radius:100px; padding:4px 10px; }
+
+  h1 { font-family:var(--display); font-weight:600; font-size:clamp(1.9rem,5vw,2.9rem); line-height:1.1; letter-spacing:-0.01em; margin:18px 0 0; }
+  .meta { display:flex; flex-wrap:wrap; gap:18px; margin-top:22px; font-family:var(--mono); font-size:0.8rem; color:var(--ink-soft); }
+  .meta b { color:var(--ink); font-weight:500; }
+
+  section.case { padding:38px 0; border-bottom:1px solid var(--line-soft); }
+  section.case:last-of-type { border-bottom:none; }
+  h2 { font-family:var(--display); font-weight:600; font-size:1.45rem; margin-bottom:14px; }
+  p { color:var(--ink-soft); margin-bottom:14px; }
+  p strong, li strong { color:var(--ink); font-weight:600; }
+  .lead-p { font-size:1.08rem; }
+
+  /* список болей */
+  .pains { list-style:none; display:grid; gap:10px; }
+  .pains li { padding-left:22px; position:relative; color:var(--ink-soft); }
+  .pains li::before { content:"→"; position:absolute; left:0; color:var(--accent); }
+
+  /* что внутри – фичи */
+  .feat { list-style:none; display:grid; gap:12px; margin-top:6px; }
+  @media (min-width:640px){ .feat { grid-template-columns:1fr 1fr; } }
+  .feat li { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:15px 17px; }
+  .feat b { color:var(--ink); font-weight:600; display:block; }
+  .feat span { display:block; color:var(--ink-soft); font-size:0.9rem; margin-top:4px; line-height:1.45; }
+
+  /* результаты – чеклист */
+  .checks { list-style:none; display:grid; gap:11px; }
+  .checks li { padding-left:28px; position:relative; color:var(--ink-soft); }
+  .checks li::before { content:"✓"; position:absolute; left:0; color:var(--accent); font-weight:700; }
+  .outcome { background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:12px; padding:18px 20px; margin-top:20px; color:var(--ink); font-family:var(--display); font-size:1.1rem; line-height:1.4; }
+
+  .shots { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .shots figure { margin:0; }
+  .shots img { width:100%; display:block; border:1px solid var(--line); border-radius:14px; box-shadow:0 14px 34px -18px rgba(0,0,0,0.85); }
+  .shots figcaption { margin-top:8px; font-family:var(--mono); font-size:0.72rem; color:var(--ink-faint); text-align:center; }
+  @media (min-width:640px){ .shots { grid-template-columns:repeat(3,1fr); gap:18px; } }
+
+  .cta { text-align:center; padding:54px 0 72px; }
+  .btn { display:inline-block; font-family:var(--body); font-weight:700; background:var(--accent); color:#06231f; padding:15px 30px; border-radius:12px; text-decoration:none; min-height:48px; }
+  .btn:hover { background:var(--accent-dim); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../index.html#works">← all work</a>
+
+    <header style="padding:8px 0 26px;">
+      <span class="eyebrow">case study</span>
+      <div class="tags"><span>app</span><span>TG mini app</span><span>psychology</span></div>
+      <h1>"The Body Remembers" – Telegram Mini App</h1>
+      <div class="meta">
+        <span>Role: <b>product and positioning</b></span>
+        <span>Development: <b>in partnership</b></span>
+        <span>Status: <b>shipped</b></span>
+      </div>
+    </header>
+
+    <section class="case">
+      <h2>How it started</h2>
+      <p class="lead-p">"The Body Remembers" is an online integrative body-therapy program: 5 weeks, 9 live Zoom sessions, a closed cohort.</p>
+      <p>The program worked and the results were there. But one systemic problem kept eating away at them: <strong>between sessions, participants "disappeared"</strong>. The insight from a session faded within a day or two – and by the next session a person arrived as if from a blank slate. Not out of laziness, but because there was no tool to help them keep working between meetings.</p>
+      <ul class="pains">
+        <li>The body journal wasn't kept regularly – notes on a phone that no one reads.</li>
+        <li>Triggers and acute reactions got lost – the moment passed unprocessed.</li>
+        <li>The facilitator worked blind – with no data on what happened between sessions.</li>
+        <li>There was no tangible proof of results for future sales.</li>
+        <li>The chat filled up with repeated questions: "where's the Zoom link?", "what time is the session?".</li>
+      </ul>
+    </section>
+
+    <section class="case">
+      <h2>The solution</h2>
+      <p><strong>A Telegram Mini App – an app right inside Telegram.</strong> It opens with a single button in the bot: nothing to download, no registration, nowhere to go – the participant is already in Telegram, and the tool is right there.</p>
+      <p>For those not yet in the cohort, the app is visible but locked – this creates the feeling of a private club and adds extra motivation to buy.</p>
+    </section>
+
+    <section class="case">
+      <h2>What's inside</h2>
+      <ul class="feat">
+        <li><b>Body journal</b><span>An interactive body map: tap a zone, choose a sensation, add a note. Entry history + reminders from the bot.</span></li>
+        <li><b>Export the journal to PDF</b><span>The whole journey by dates, zones and sensations – in one click. Tangible proof of the work.</span></li>
+        <li><b>Stop-reaction journal</b><span>Logging triggers: what happened, which zone reacted, intensity 1–10, a note.</span></li>
+        <li><b>AI assistant</b><span>Work through an acute moment here and now, without waiting for the next session.</span></li>
+        <li><b>Pattern diagnostics</b><span>A test at the start of the program: the participant learns her behavior pattern under stress.</span></li>
+        <li><b>Weekly check-in with a chart</b><span>A short check-in on how she's doing – week-by-week dynamics are built automatically.</span></li>
+        <li><b>Before-and-after surveys</b><span>A measurable result: what it was like before, what changed after – for marketing and case studies.</span></li>
+        <li><b>Reviews, schedule, chat</b><span>Reviews straight to the facilitator; all dates and Zoom links; contact with the cohort and the facilitator – from the app.</span></li>
+      </ul>
+    </section>
+
+    <section class="case">
+      <h2>What the facilitator got</h2>
+      <ul class="checks">
+        <li>Participants work between sessions – journal, stop-reactions, check-ins.</li>
+        <li>Analytics on each one: what hurt before and what changed after.</li>
+        <li>Proof of effectiveness – in numbers and records, not just "it got better".</li>
+        <li>Ready-made marketing material – before/after surveys, reviews, dynamics.</li>
+        <li>The chat is free of repeated questions, and participants no longer get lost between meetings.</li>
+      </ul>
+      <div class="outcome">A set of Zoom sessions became a product with measurable results. The app doesn't replace the facilitator's work – it amplifies and extends it between sessions.</div>
+    </section>
+
+    <section class="case">
+      <h2>How it looks</h2>
+      <div class="shots">
+        <figure><img src="../visual/cases/telo-1.jpg" alt="The Body Remembers app – main journal screen" loading="lazy"><figcaption>Journal</figcaption></figure>
+        <figure><img src="../visual/cases/telo-2.jpg" alt="Body map – choosing a zone of tension" loading="lazy"><figcaption>Body map</figcaption></figure>
+        <figure><img src="../visual/cases/telo-3.jpg" alt="Change tracker with state sliders" loading="lazy"><figcaption>Tracker</figcaption></figure>
+        <figure><img src="../visual/cases/telo-4.jpg" alt="My journey – pattern diagnostics and cohort results" loading="lazy"><figcaption>My journey</figcaption></figure>
+        <figure><img src="../visual/cases/telo-5.jpg" alt="My cohort – program results and chat access" loading="lazy"><figcaption>My cohort</figcaption></figure>
+      </div>
+    </section>
+
+    <div class="cta">
+      <a class="btn" href="../index.html#final">Discuss your own app</a>
+    </div>
+  </div>
+</body>
+</html>

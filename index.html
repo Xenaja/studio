@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8">
+<script>document.documentElement.classList.remove('no-js');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Websites, chatbots and apps built for your goal – marketing + development</title>
+<meta name="description" content="Websites and chatbots that work for you. Marketing and development in one pair of hands – no translator between the designer and the programmer.">
+
+<link rel="canonical" href="https://xenaja.github.io/studio/">
+<!-- Open Graph: превью при отправке ссылки в Telegram / соцсети -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Websites, chatbots and apps built for your goal">
+<meta property="og:description" content="Marketing and development in one pair of hands. You can come without a finished brief – we'll figure it out together.">
+<meta property="og:url" content="https://xenaja.github.io/studio/">
+<meta property="og:image" content="https://xenaja.github.io/studio/visual/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- favicon: inline svg, каретка терминала в акцентном цвете -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f0e0c'/><text x='18' y='72' font-family='monospace' font-size='62' fill='%235eead4'>&gt;_</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"></noscript>
+<style>
+  :root {
+    /* ---- Палитра: тёмный тёплый уголь + один холодный акцент ---- */
+    --bg:          #0f0e0c;   /* основной фон, тёплый уголь */
+    --bg-2:        #14120f;   /* слегка светлее – секции */
+    --panel:       #181610;   /* панели/карточки */
+    --panel-2:     #1d1b14;   /* приподнятые панели */
+    --line:        rgba(94, 234, 212, 0.12);   /* тонкие линии акцентом */
+    --line-soft:   rgba(245, 240, 225, 0.08);
+
+    --ink:         #f3efe2;   /* основной светлый текст */
+    --ink-soft:    #b6b0a0;   /* приглушённый текст */
+    --ink-faint:   #7d776a;   /* совсем тихий текст / лейблы */
+
+    --accent:      #5eead4;   /* холодный цианово-мятный акцент */
+    --accent-dim:  #3fbfac;   /* притушённый акцент для hover */
+    --accent-glow: rgba(94, 234, 212, 0.42);
+
+    --display: 'Familjen Grotesk', system-ui, sans-serif;
+    --body:    'Hanken Grotesk', system-ui, sans-serif;
+    --mono:    'IBM Plex Mono', ui-monospace, monospace;
+
+    --container: 1120px;
+    --pad-x: 22px;
+    --sec-y: 72px;
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Атмосферный фон: радиальные свечения акцентом + тёплое сверху */
+  body::after {
+    content: "";
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 45% at 50% -8%, rgba(94,234,212,0.10), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 100% 18%, rgba(94,234,212,0.06), transparent 70%),
+      radial-gradient(ellipse 60% 50% at 0% 88%, rgba(232,168,90,0.05), transparent 72%);
+  }
+  /* Тонкая сетка-«редактор» + зерно */
+  body::before {
+    content: "";
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(245,240,225,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,240,225,0.018) 1px, transparent 1px),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    background-size: 46px 46px, 46px 46px, 160px 160px;
+    opacity: 0.55;
+    mix-blend-mode: soft-light;
+  }
+
+  .wrap { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--pad-x); position: relative; z-index: 2; }
+  .narrow { max-width: 760px; }
+
+  section { padding: var(--sec-y) 0; position: relative; }
+
+  h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.1; letter-spacing: -0.015em; }
+
+  a { color: var(--accent); }
+
+  /* Skip-link для клавиатуры */
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 999;
+    background: var(--accent); color: #06231f; font-family: var(--mono);
+    font-size: 0.9rem; padding: 12px 18px; border-radius: 0 0 10px 0; text-decoration: none;
+  }
+  .skip-link:focus { left: 0; }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  /* ---- TOP NAV ---- */
+  .topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 60; background: rgba(15,14,12,0.72); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line-soft); }
+  .nav-wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .brand { font-family: var(--mono); font-weight: 600; font-size: 0.9rem; color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; position: relative; z-index: 62; }
+  .brand::before { content: ">_"; color: var(--accent); }
+  .nav-toggle { display: inline-flex; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; background: none; border: none; cursor: pointer; padding: 0; position: relative; z-index: 62; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; margin: 0 auto; transition: transform .3s ease, opacity .3s ease; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-links { position: fixed; inset: 0; z-index: 61; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; background: rgba(15,14,12,0.97); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); transform: translateX(100%); transition: transform .35s cubic-bezier(0.16,1,0.3,1); }
+  .nav-links.open { transform: none; }
+  .nav-links a { font-family: var(--mono); font-size: 1.15rem; color: var(--ink-soft); text-decoration: none; transition: color .2s ease; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a.active { color: var(--accent); }
+  .nav-links a.nav-cta { border: 1px solid var(--accent-dim); color: var(--accent); padding: 12px 26px; border-radius: 100px; background: rgba(94,234,212,0.06); min-height: 48px; display: inline-flex; align-items: center; touch-action: manipulation; }
+  .nav-links a.nav-cta:hover { background: var(--accent); color: #06231f; border-color: var(--accent); }
+  body.menu-open { overflow: hidden; }
+
+  @media (min-width: 860px) {
+    .nav-toggle { display: none; }
+    .nav-links { position: static; inset: auto; transform: none; flex-direction: row; gap: 26px; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+    .nav-links a { font-size: 0.82rem; }
+    .nav-cta { font-size: 0.82rem; padding: 8px 16px; min-height: 40px; }
+  }
+
+  /* Моно-лейбл с // */
+  .eyebrow {
+    font-family: var(--mono); font-weight: 500; font-size: 0.74rem; letter-spacing: 0.04em;
+    color: var(--accent); margin-bottom: 18px; display: inline-flex; align-items: center; gap: 8px;
+    text-transform: lowercase;
+  }
+  .eyebrow::before { content: "//"; opacity: 0.6; }
+
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  .no-js .reveal { opacity: 1; transform: none; }
+
+  /* лёгкий каскад появления внутри групп */
+  .cards .reveal:nth-child(2), .quotes .reveal:nth-child(2), .price-grid .reveal:nth-child(2),
+  .myth-list .reveal:nth-child(2), .steps .reveal:nth-child(2), .faq-list .reveal:nth-child(2) { transition-delay: .07s; }
+  .cards .reveal:nth-child(3), .price-grid .reveal:nth-child(3), .quotes .reveal:nth-child(3),
+  .myth-list .reveal:nth-child(3), .steps .reveal:nth-child(3), .faq-list .reveal:nth-child(3) { transition-delay: .14s; }
+  .myth-list .reveal:nth-child(4), .steps .reveal:nth-child(4), .faq-list .reveal:nth-child(4) { transition-delay: .21s; }
+  .steps .reveal:nth-child(5), .faq-list .reveal:nth-child(5) { transition-delay: .28s; }
+
+  /* ---- BUTTONS ---- */
+  .btn {
+    font-family: var(--mono); font-weight: 500; font-size: 0.94rem; line-height: 1.3;
+    min-height: 48px; padding: 13px 26px; border-radius: 12px;
+    border: 1px solid transparent; cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+  }
+  .btn-primary {
+    background: var(--accent); color: #06231f; font-weight: 600;
+    box-shadow: 0 0 0 1px rgba(94,234,212,0.35), 0 10px 30px -8px var(--accent-glow);
+  }
+  .btn-primary::before { content: "›"; font-size: 1.05rem; opacity: 0.85; }
+  .btn-primary:hover { background: var(--accent-dim); transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(94,234,212,0.5), 0 16px 38px -8px var(--accent-glow); }
+  .btn-ghost { background: rgba(94,234,212,0.04); color: var(--ink); border: 1px solid var(--line); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* ---- HERO ---- */
+  .hero { padding: 104px 0 84px; text-align: center; position: relative; overflow: hidden; }
+
+  @keyframes heroIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  .hero .wrap > * { opacity: 0; animation: heroIn 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+  .hero .hero-tag { animation-delay: 0.05s; }
+  .hero h1       { animation-delay: 0.22s; }
+  .hero .lead    { animation-delay: 0.46s; }
+  .hero .cta-row { animation-delay: 0.66s; }
+  .hero .micro   { animation-delay: 0.84s; }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--mono); font-size: 0.76rem; color: var(--ink-soft);
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 8px 16px; border-radius: 100px; margin-bottom: 30px;
+  }
+  .hero-tag .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: pulse 2.4s infinite; }
+  @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(94,234,212,0.5)} 70%{box-shadow:0 0 0 8px rgba(94,234,212,0)} 100%{box-shadow:0 0 0 0 rgba(94,234,212,0)} }
+
+  .hero h1 { font-size: clamp(2.3rem, 8vw, 4.2rem); max-width: 16ch; margin: 0 auto; }
+  .hero h1 em { font-style: normal; color: var(--accent); text-shadow: 0 0 28px var(--accent-glow); }
+  .hero .lead {
+    font-family: var(--mono); font-size: clamp(1rem, 4vw, 1.4rem); color: var(--ink-soft);
+    margin: 24px auto 0; font-weight: 400; min-height: 1.7em;
+  }
+  .hero .lead .cursor { color: var(--accent); animation: blink 1.1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 36px; }
+  .hero .micro { margin-top: 24px; font-family: var(--mono); font-size: 0.82rem; color: var(--ink-faint); }
+
+  /* ---- EMPATHY ---- */
+  .empathy { background: var(--bg-2); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+  .empathy p { font-size: 1.1rem; color: var(--ink-soft); margin-bottom: 20px; }
+  .empathy p:last-child { margin-bottom: 0; }
+  .empathy strong { color: var(--ink); font-weight: 600; }
+  .empathy .pull {
+    font-family: var(--display); font-size: clamp(1.18rem, 3.8vw, 1.4rem); line-height: 1.45; color: var(--ink);
+    border-left: 2px solid var(--accent); padding-left: 22px; margin-top: 40px; font-weight: 500;
+  }
+
+  /* ---- SECTION HEADINGS ---- */
+  .sec-head { max-width: 38ch; margin-bottom: 40px; }
+  .sec-head.center { margin-left: auto; margin-right: auto; text-align: center; max-width: 30ch; }
+  .sec-head.center .eyebrow { justify-content: center; }
+  .sec-head h2 { font-size: clamp(1.9rem, 5.4vw, 2.9rem); line-height: 1.14; }
+
+  /* ---- ABOUT ---- */
+  .about-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
+  .about-photo {
+    aspect-ratio: 4/5; max-width: 300px; border-radius: var(--radius);
+    background: linear-gradient(150deg, rgba(94,234,212,0.14), rgba(125,119,106,0.10));
+    border: 1px solid var(--line);
+    display: grid; place-items: center; color: var(--ink-faint); font-family: var(--mono); font-size: 0.8rem;
+    position: relative; overflow: hidden;
+  }
+  .about-photo::before {
+    content: ""; position: absolute; top: 12px; left: 12px; z-index: 2;
+    width: 9px; height: 9px; border-radius: 50%; background: var(--accent);
+    box-shadow: 16px 0 0 rgba(232,168,90,0.7), 32px 0 0 rgba(245,240,225,0.4);
+  }
+  .about-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .about-text h2 { font-size: clamp(1.7rem, 6vw, 2.4rem); margin-bottom: 20px; }
+  .about-text p { color: var(--ink-soft); margin-bottom: 15px; }
+  .about-text strong { color: var(--ink); font-weight: 600; }
+
+  /* ---- CARDS (чем отличаюсь) ---- */
+  .cards { display: grid; grid-template-columns: 1fr; gap: 18px; align-items: start; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line-soft); border-radius: var(--radius);
+    padding: 28px 26px 30px; position: relative; overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+  .card:hover { transform: translateY(-5px); border-color: var(--line); box-shadow: 0 20px 44px -16px rgba(0,0,0,0.7); }
+  .card:hover::before { transform: scaleX(1); }
+  .card-num { font-family: var(--mono); font-size: 1.2rem; font-weight: 500; color: var(--accent); margin-bottom: 16px; display: block; opacity: 0.9; }
+  .card-num::before { content: "// "; opacity: 0.5; }
+  .card h3 { font-size: 1.22rem; margin-bottom: 11px; }
+  .card p { font-size: 0.96rem; color: var(--ink-soft); }
+
+  /* ---- WORKS ---- */
+  .works { background: var(--bg-2); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+  .work-group { margin-bottom: 42px; }
+  .work-group:last-child { margin-bottom: 0; }
+  .work-group > h3 { font-size: 1.35rem; margin-bottom: 20px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .work-group > h3 span { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; color: var(--accent); }
+  .work-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .work-card {
+    background: var(--panel-2); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    box-shadow: 0 10px 28px -14px rgba(0,0,0,0.75);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  a.work-card:hover { transform: translateY(-4px); border-color: var(--line); box-shadow: 0 18px 40px -18px rgba(0,0,0,0.7); }
+  .work-thumb {
+    aspect-ratio: 16/10; display: grid; place-items: center; color: var(--ink-faint);
+    font-family: var(--mono); font-size: 0.78rem; position: relative;
+    background:
+      repeating-linear-gradient(135deg, rgba(94,234,212,0.05) 0 10px, transparent 10px 20px),
+      var(--panel-2);
+  }
+  .work-thumb::before { content: ""; position: absolute; top: 12px; left: 12px; width: 8px; height: 8px; border-radius: 50%; background: rgba(245,240,225,0.35); box-shadow: 14px 0 0 rgba(245,240,225,0.35), 28px 0 0 rgba(245,240,225,0.35); }
+  .work-body { padding: 17px 19px 21px; }
+  .work-body .task { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); margin-bottom: 7px; }
+  .work-body .task::before { content: "$ "; color: var(--accent); }
+  .work-body .res { font-size: 0.96rem; color: var(--ink); font-weight: 500; line-height: 1.4; }
+  .work-name { font-size: 1.05rem; color: var(--ink); font-weight: 600; line-height: 1.25; }
+  .work-desc { margin-top: 6px; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.45; }
+  .apps-text { font-size: 1.05rem; color: var(--ink-soft); max-width: 64ch; }
+  .apps-text strong { color: var(--ink); font-weight: 600; }
+  .apps-note { margin-top: 24px; max-width: 72ch; font-size: 0.9rem; color: var(--ink-faint); line-height: 1.6; }
+  .apps-note strong { color: var(--ink-soft); font-weight: 600; }
+  /* карточка-работа: кликабельна, ведёт на страницу-кейс (когда готова) */
+  a.work-card { text-decoration: none; color: inherit; }
+  .work-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: object-position 4.5s ease; }
+  .thumb-ph { position: relative; z-index: 1; }
+  .work-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 11px; }
+  .work-tags span { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.04em; color: var(--accent); border: 1px solid var(--line); border-radius: 100px; padding: 3px 9px; }
+  .work-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 13px; font-family: var(--mono); font-size: 0.76rem; color: var(--accent); transition: gap 0.2s ease; }
+  a.work-card:hover .work-more { gap: 11px; }
+  .work-status { display: inline-flex; align-items: center; gap: 7px; margin-top: 13px; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); }
+  .work-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ink-faint); }
+  .work-status.live { color: var(--accent); }
+  .work-status.live::before { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+  /* обложка-чат для ботов (воссозданный диалог) */
+  .work-thumb.chat-thumb { display: flex; align-items: center; padding: 14px 16px; background: var(--bg-2); }
+  .work-thumb.chat-thumb::before { content: none; }
+  .mini-chat { width: 100%; display: flex; flex-direction: column; gap: 7px; }
+  .mini-chat .b { max-width: 82%; font-size: 0.74rem; line-height: 1.32; padding: 7px 11px; border-radius: 12px; font-family: var(--body); }
+  .mini-chat .b.bot { background: var(--panel); color: var(--ink-soft); border: 1px solid var(--line-soft); border-top-left-radius: 3px; align-self: flex-start; }
+  .mini-chat .b.user { background: var(--accent); color: #06231f; font-weight: 500; border-top-right-radius: 3px; align-self: flex-end; }
+  /* карточка приложения */
+  .app-card { max-width: 460px; }
+  .work-thumb.app-thumb { background: var(--bg-2); }
+  .work-thumb.app-thumb::before { content: none; }
+
+  /* ---- TESTIMONIALS ---- */
+  .quotes { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  .quote { background: var(--panel); border: 1px solid var(--line-soft); border-radius: var(--radius); padding: 28px 26px; position: relative; }
+  .quote .mark { font-family: var(--display); font-size: 3rem; line-height: 0.5; color: var(--accent); position: absolute; top: 26px; right: 26px; opacity: 0.3; }
+  .quote p { font-size: 1.02rem; color: var(--ink-soft); font-family: var(--display); margin-bottom: 18px; font-weight: 400; line-height: 1.5; }
+  .quote p strong { color: var(--ink); font-weight: 600; }
+  .quote .who { display: flex; align-items: center; gap: 12px; }
+  .quote .ava { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-dim)); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: 600; font-size: 0.78rem; color: #06231f; }
+  .quote .who b { font-family: var(--body); font-weight: 700; font-size: 0.95rem; display: block; color: var(--ink); }
+  .quote .who small { font-family: var(--mono); color: var(--ink-faint); font-size: 0.76rem; }
+
+  /* ---- MYTHS ---- */
+  .myths { position: relative; overflow: hidden; }
+  .myths::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 60% 70% at 12% 0%, rgba(94,234,212,0.08), transparent 60%); }
+  .myths .wrap { z-index: 2; }
+  .myth-list { display: grid; gap: 14px; }
+  .myth {
+    background: var(--panel); border: 1px solid var(--line-soft); border-radius: var(--radius);
+    padding: 24px 26px; display: grid; grid-template-columns: 1fr; gap: 12px; align-items: start;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .myth:hover { border-color: var(--line); background: var(--panel-2); }
+  .myth .tag { font-family: var(--mono); font-size: 0.9rem; color: var(--accent); line-height: 1.5; }
+  .myth .tag::before { content: "// "; opacity: 0.55; }
+  .myth .ans { font-size: 0.98rem; color: var(--ink-soft); }
+  .myth .ans b { color: var(--ink); font-weight: 700; }
+
+  /* ---- QUIZ (терминал) ---- */
+  .quiz-wrap {
+    background: var(--panel); color: var(--ink); border-radius: 20px;
+    box-shadow: 0 30px 70px -24px rgba(0,0,0,0.8); position: relative; overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .quiz-bar { display: flex; align-items: center; gap: 8px; padding: 13px 20px; border-bottom: 1px solid var(--line-soft); font-family: var(--mono); font-size: 0.74rem; color: var(--ink-faint); background: rgba(0,0,0,0.18); }
+  .quiz-bar .dots { display: flex; gap: 7px; }
+  .quiz-bar .dots i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+  .quiz-bar .dots i:nth-child(1){ background:#e0664f; }
+  .quiz-bar .dots i:nth-child(2){ background:#e8a83c; }
+  .quiz-bar .dots i:nth-child(3){ background:var(--accent); }
+  .quiz-bar .fname { margin-left: 6px; opacity: 0.8; }
+  .quiz-body { padding: 32px 24px 38px; position: relative; }
+  .quiz-body::after { content: ""; position: absolute; top: -50px; right: -60px; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(94,234,212,0.16), transparent 70%); pointer-events: none; }
+  .quiz-body .eyebrow { position: relative; }
+  .quiz-body h2 { font-size: clamp(1.5rem, 5vw, 2.1rem); max-width: 22ch; position: relative; }
+  .quiz-intro { color: var(--ink-soft); margin: 16px 0 30px; max-width: 60ch; position: relative; font-size: 0.98rem; }
+  .quiz-stage { position: relative; min-height: 250px; }
+  .q-step { display: none; animation: fade 0.4s ease; }
+  .q-step.active { display: block; }
+  @keyframes fade { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+  .q-progress { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-faint); margin-bottom: 22px; display: flex; align-items: center; gap: 12px; }
+  .q-progress .track { flex: 1; height: 4px; background: rgba(245,240,225,0.08); border-radius: 4px; overflow: hidden; }
+  .q-progress .fill { height: 100%; width: 25%; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); border-radius: 4px; transition: width 0.4s cubic-bezier(0.16,1,0.3,1); box-shadow: 0 0 10px var(--accent-glow); }
+  .q-text { font-family: var(--display); font-size: clamp(1.2rem, 4.5vw, 1.4rem); margin-bottom: 22px; line-height: 1.3; font-weight: 600; }
+  .q-text::before { content: "> "; font-family: var(--mono); color: var(--accent); font-size: 1rem; }
+  .q-opts { display: grid; gap: 11px; }
+  .q-opt {
+    background: rgba(94,234,212,0.03); border: 1px solid var(--line-soft); color: var(--ink);
+    text-align: left; padding: 15px 20px; border-radius: 12px; font-family: var(--body); font-size: 0.98rem;
+    cursor: pointer; min-height: 48px; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s ease; display: flex; align-items: center; gap: 13px;
+  }
+  .q-opt::before { content: "›"; font-family: var(--mono); color: var(--accent); font-size: 1.2rem; transition: transform 0.2s ease; flex-shrink: 0; }
+  .q-opt:hover { background: rgba(94,234,212,0.08); border-color: var(--line); transform: translateX(3px); }
+  .q-opt:hover::before { transform: translateX(3px); }
+  .q-result { display: none; animation: fade 0.5s ease; }
+  .q-result.active { display: block; }
+  .q-result .badge { display: inline-flex; align-items:center; gap:7px; font-family: var(--mono); font-weight: 500; font-size: 0.72rem; color: #06231f; background: var(--accent); padding: 7px 13px; border-radius: 8px; margin-bottom: 18px; }
+  .q-result .badge::before { content: "●"; font-size: 0.55rem; }
+  .q-result h3 { font-size: 1.45rem; margin-bottom: 12px; }
+  .q-result p { color: var(--ink-soft); margin-bottom: 12px; }
+  .q-result .extra { background: rgba(94,234,212,0.05); border-left: 2px solid var(--accent); padding: 15px 18px; border-radius: 10px; font-size: 0.93rem; color: var(--ink-soft); margin: 16px 0 24px; }
+  .q-restart { background: none; border: none; color: var(--accent); font-family: var(--mono); font-size: 0.82rem; cursor: pointer; text-decoration: underline; margin-left: 14px; min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  .quiz-foot { margin-top: 26px; font-size: 0.9rem; color: var(--ink-faint); position: relative; font-family: var(--mono); }
+
+  /* ---- PRICING ---- */
+  .price-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .price { background: var(--panel); border: 1px solid var(--line-soft); border-radius: var(--radius); padding: 30px 26px; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
+  .price:hover { transform: translateY(-5px); border-color: var(--line); box-shadow: 0 20px 44px -18px rgba(0,0,0,0.7); }
+  .price .term { font-family: var(--mono); font-size: 0.74rem; color: var(--accent); margin-bottom: 14px; }
+  .price .term::before { content: "// "; opacity: 0.5; }
+  .price h3 { font-size: 1.4rem; margin-bottom: 16px; }
+  .price .lines { list-style: none; }
+  .price .lines li { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px dashed var(--line-soft); font-size: 0.95rem; gap: 12px; color: var(--ink-soft); }
+  .price .lines li:last-child { border-bottom: none; }
+  .price .lines b { font-family: var(--mono); font-weight: 600; color: var(--accent); white-space: nowrap; }
+  .price .note { font-size: 0.92rem; color: var(--ink-soft); }
+  .price-foot { text-align: center; margin-top: 34px; font-size: 1.02rem; color: var(--ink-soft); max-width: 54ch; margin-left: auto; margin-right: auto; }
+
+  /* ---- PROCESS ---- */
+  .process { background: var(--bg-2); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+  .steps { display: grid; gap: 0; max-width: 780px; }
+  .step { display: grid; grid-template-columns: 56px 1fr; gap: 20px; padding: 22px 18px; align-items: start; border-bottom: 1px solid var(--line-soft); position: relative; border-radius: 10px; }
+  .step:last-child { border-bottom: none; }
+  .step .n { font-family: var(--mono); font-size: 0.88rem; font-weight: 600; color: var(--accent); padding-top: 5px; }
+  .step h3 { font-size: 1.18rem; margin-bottom: 5px; }
+  .step p { font-size: 0.96rem; color: var(--ink-soft); }
+
+  /* ---- FAQ ---- */
+  .faq-list { display: grid; gap: 11px; max-width: 780px; }
+  .faq-item { background: var(--panel); border: 1px solid var(--line-soft); border-radius: 14px; overflow: hidden; transition: border-color 0.3s ease; position: relative; }
+  .faq-item[open] { border-color: var(--line); }
+  .faq-item summary { list-style: none; cursor: pointer; padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-family: var(--display); font-size: 1.08rem; line-height: 1.3; color: var(--ink); font-weight: 600; min-height: 48px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: "+"; font-family: var(--mono); font-size: 1.4rem; color: var(--accent); transition: transform 0.3s ease; flex-shrink: 0; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item .faq-body { padding: 0 22px 22px; color: var(--ink-soft); font-size: 0.98rem; }
+
+  /* ---- FINAL + FORM ---- */
+  .final { text-align: center; }
+  .final-box {
+    background: linear-gradient(180deg, var(--panel), var(--bg-2));
+    border-radius: 22px; padding: 56px 24px; color: var(--ink); position: relative; overflow: hidden;
+    box-shadow: 0 40px 80px -30px rgba(0,0,0,0.85); border: 1px solid var(--line);
+  }
+  .final-box::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 70% 80% at 50% 0%, rgba(94,234,212,0.12), transparent 62%); }
+  .final-box > * { position: relative; }
+  .final-box h2 { font-size: clamp(1.9rem, 6.5vw, 2.8rem); }
+  .final-box > p { color: var(--ink-soft); font-size: 1.08rem; max-width: 46ch; margin: 18px auto 30px; }
+
+  .lead-form { max-width: 440px; margin: 26px auto 0; display: grid; gap: 12px; text-align: left; }
+  .lead-form .field { display: grid; gap: 6px; }
+  .lead-form label { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-soft); letter-spacing: 0.02em; }
+  .lead-form input, .lead-form textarea {
+    width: 100%; font-family: var(--body); font-size: 16px; color: var(--ink);
+    background: rgba(245,240,225,0.04); border: 1px solid var(--line-soft);
+    border-radius: 12px; padding: 13px 15px; min-height: 48px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .lead-form input::placeholder, .lead-form textarea::placeholder { color: var(--ink-faint); }
+  .lead-form input:focus, .lead-form textarea:focus { outline: none; border-color: var(--accent); background: rgba(94,234,212,0.05); }
+  .lead-form textarea { resize: vertical; min-height: 88px; }
+  .lead-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .lead-form .consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 4px; font-family: var(--body); font-size: 0.84rem; line-height: 1.45; color: var(--ink-soft); text-align: left; cursor: pointer; }
+  .lead-form .consent input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--accent); cursor: pointer; }
+  .lead-form .consent a { color: var(--accent); text-decoration: underline; }
+  .lead-form button { margin-top: 6px; width: 100%; }
+  .lead-form button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .form-status { font-family: var(--mono); font-size: 0.84rem; margin-top: 6px; min-height: 1.2em; text-align: center; }
+  .form-status.ok { color: var(--accent); }
+  .form-status.err { color: #f0a85a; }
+  .form-alt { margin-top: 24px; font-family: var(--mono); font-size: 0.82rem; color: var(--ink-faint); }
+
+  .contacts { margin-top: 14px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .contacts a { font-family: var(--mono); font-size: 0.84rem; color: var(--accent); text-decoration: none; border: 1px solid var(--accent-dim); background: rgba(94,234,212,0.07); padding: 10px 18px; border-radius: 100px; min-height: 44px; display: inline-flex; align-items: center; touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: all 0.2s; }
+  .contacts a:hover { color: #06231f; border-color: var(--accent); background: var(--accent); }
+
+  /* ---- FOOTER ---- */
+  footer { text-align: center; padding: 38px 0 calc(86px + env(safe-area-inset-bottom)); color: var(--ink-faint); font-family: var(--mono); font-size: 0.8rem; }
+  footer a { color: var(--ink-faint); text-decoration: underline; }
+  footer a:hover { color: var(--accent); }
+
+  /* ---- STICKY CTA (мобайл) ---- */
+  .sticky-cta {
+    position: fixed; left: 14px; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 50;
+    text-align: center; min-height: 50px; padding: 14px 24px; border-radius: 14px;
+    background: var(--accent); color: #06231f; font-family: var(--mono); font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;
+    box-shadow: 0 12px 30px -8px var(--accent-glow); touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  }
+  .sticky-cta::before { content: "›"; }
+
+  /* ---- КНОПКА «НАВЕРХ» ---- */
+  .to-top {
+    position: fixed; right: 16px; bottom: calc(82px + env(safe-area-inset-bottom)); z-index: 55;
+    width: 46px; height: 46px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--panel-2); border: 1px solid var(--line); color: var(--accent);
+    font-size: 1.3rem; line-height: 1; cursor: pointer;
+    box-shadow: 0 10px 26px -10px rgba(0,0,0,0.85);
+    opacity: 0; visibility: hidden; transform: translateY(8px);
+    transition: opacity .25s ease, transform .25s ease, visibility .25s, border-color .2s ease, background .2s ease;
+    touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+  }
+  .to-top.show { opacity: 1; visibility: visible; transform: none; }
+  .to-top:hover { border-color: var(--accent); background: var(--panel); }
+  @media (min-width: 1024px) { .to-top { right: 28px; bottom: 28px; } }
+
+  /* ============ TABLET ≥640px ============ */
+  @media (min-width: 640px) {
+    :root { --pad-x: 32px; --sec-y: 84px; }
+    body { font-size: 18px; }
+    .hero { padding: 116px 0 92px; }
+    .cards { grid-template-columns: repeat(3, 1fr); }
+    .cards .card:nth-child(2) { margin-top: 36px; }
+    .cards .card:nth-child(3) { margin-top: 16px; }
+    .work-grid { grid-template-columns: repeat(2, 1fr); }
+    .quotes { grid-template-columns: repeat(2, 1fr); }
+    .price-grid { grid-template-columns: repeat(3, 1fr); }
+    .myth { grid-template-columns: 230px 1fr; gap: 24px; }
+    .quiz-body { padding: 40px 40px 46px; }
+    .final-box { padding: 68px 40px; }
+    .step { grid-template-columns: 64px 1fr; }
+  }
+
+  /* ============ DESKTOP ≥1024px ============ */
+  @media (min-width: 1024px) {
+    :root { --sec-y: 92px; }
+    .hero { padding: 128px 0 100px; }
+    .about-grid { grid-template-columns: 0.62fr 1fr; gap: 52px; }
+    .about-photo { max-width: none; }
+    .quotes { grid-template-columns: repeat(3, 1fr); }
+    .work-grid { grid-template-columns: repeat(3, 1fr); }
+    .work-grid.two { grid-template-columns: repeat(2, 1fr); max-width: 720px; }
+    .apps-note { margin: 48px auto 0; max-width: 78ch; text-align: center; }
+    .sticky-cta { display: none; }
+    footer { padding: 44px 0 60px; }
+  }
+
+  /* ---- reduced motion ---- */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+    .reveal { opacity: 1 !important; transform: none !important; }
+    .hero .wrap > * { opacity: 1 !important; }
+  }
+
+  /* ============ ОЖИВЛЕНИЕ ============ */
+  /* 1) спотлайт за курсором на карточках */
+  .card::after, .price::after, .quote::after, .step::after, .faq-item::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    opacity: 0; transition: opacity .35s ease;
+    background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(94,234,212,0.10), transparent 62%);
+  }
+  .card:hover::after, .price:hover::after, .quote:hover::after, .step:hover::after, .faq-item:hover::after { opacity: 1; }
+
+  /* 2) живой фон hero – медленная аврора */
+  .hero::before {
+    content: ""; position: absolute; inset: -25% -15% auto -15%; height: 150%; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 45% 38% at 28% 30%, rgba(94,234,212,0.18), transparent 60%),
+      radial-gradient(ellipse 40% 38% at 76% 42%, rgba(232,168,90,0.09), transparent 62%);
+    filter: blur(12px); animation: aurora 18s ease-in-out infinite alternate;
+  }
+  @keyframes aurora {
+    from { transform: translate3d(-3%, -1%, 0) scale(1); }
+    to   { transform: translate3d(4%, 3%, 0) scale(1.12); }
+  }
+
+  /* 3) бегущая mono-строка */
+  .ticker { overflow: hidden; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); background: var(--bg-2); padding: 14px 0; position: relative; z-index: 2; }
+  .ticker__track { display: inline-flex; align-items: center; gap: 26px; white-space: nowrap; font-family: var(--mono); font-size: 0.92rem; color: var(--ink-soft); animation: ticker 32s linear infinite; will-change: transform; }
+  .ticker__track i { color: var(--accent); font-style: normal; opacity: 0.7; }
+  .ticker:hover .ticker__track { animation-play-state: paused; }
+  .ticker.rev .ticker__track { animation-direction: reverse; }
+  @keyframes ticker { to { transform: translateX(-50%); } }
+
+  /* 4) оживающее превью работ – панорама скриншота при наведении */
+  a.work-card:hover .work-thumb img { object-position: bottom center; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero::before { animation: none; }
+    .ticker__track { animation: none; }
+    .work-card:hover .work-thumb img { object-position: top center; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#content" class="skip-link">Skip to content</a>
+
+<nav class="topbar" id="top">
+  <div class="wrap nav-wrap">
+    <a href="#top" class="brand">Ksenia Telegina</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <div class="nav-links" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#works">Work</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#final" class="nav-cta">Discuss your project</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-tag"><span class="dot"></span>landing pages · chatbots · apps</div>
+    <h1>Websites and chatbots that <em>work for you</em></h1>
+    <p class="lead"><span class="type">Marketing and development in one pair of hands</span><span class="cursor">_</span></p>
+    <div class="cta-row">
+      <a href="#final" class="btn btn-primary">Discuss your project</a>
+      <a href="#works" class="btn btn-ghost">See my work</a>
+    </div>
+    <p class="micro">Not just a pretty cover, but a product built for results. You can come without a brief.</p>
+  </div>
+</header>
+
+<main id="content">
+
+<section class="empathy" id="empathy">
+  <div class="wrap narrow">
+    <p class="reveal">You need a website or a bot, but contractors speak their own language, deadlines slip, and what you get is a pretty cover or a template that brings no results. Sound familiar?</p>
+    <p class="reveal">Usually there's one reason: the marketer, the designer and the programmer work separately, and you're the translator between them. Meaning gets lost along the way, and the result suffers.</p>
+    <p class="pull reveal">I cover both&nbsp;marketing and&nbsp;development – so the product comes together as a single whole, not as a sum of mismatched pieces.</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-photo reveal">
+        <video class="about-video" muted loop playsinline preload="none" poster="visual/me-poster.jpg" aria-label="Ksenia Telegina">
+          <source src="visual/me-loop.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="about-text reveal">
+        <span class="eyebrow">who'll do the work</span>
+        <h2>Hi, I'm Ksenia Telegina</h2>
+        <p>I combine two skills that usually live in different people – <strong>marketing and development</strong>. I understand business goals and have a designer's eye.</p>
+        <p>So with me you don't need to be the middleman between a strategist, a designer and a programmer: I carry the task from meaning to launch.</p>
+        <p>I build websites and chatbots myself. For complex apps I bring in a backend developer I've worked with as a pair for a long time – so you get both the speed of a single maker and the strength of a team where it's needed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">what makes me different</span>
+      <h2>Everything in one pair of hands – no agencies, no translators</h2>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <span class="card-num">01</span>
+        <h3>Everything in one pair of hands</h3>
+        <p>Marketing and development – one person. No need to explain the idea first to a designer, then again to a programmer: meaning isn't lost, and deadlines don't stretch out over approvals.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-num">02</span>
+        <h3>I build for leads, not just "to spec"</h3>
+        <p>If I see that the copy, the structure or the customer journey can be stronger – I'll suggest it. What matters to me is that the solution works for you and sells your service or product, not that it's merely formally delivered.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-num">03</span>
+        <h3>I explain in plain language and stay in touch</h3>
+        <p>No technical fog: what we're doing and why – in normal words. After launch I help you get comfortable and fix things if anything comes up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="works" id="works">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">work and results</span>
+      <h2>What I do – and what it gives you</h2>
+    </div>
+
+    <!-- КАК ДОБАВИТЬ КЕЙС (по мере готовности):
+         1) скопировать cases/_template.html → cases/имя.html, заполнить разбор;
+         2) когда кейс готов – поменять href карточки с живого сайта на cases/имя.html
+            и текст ссылки на «смотреть кейс →» (сейчас карточки ведут на живые сайты);
+         3) положить скрин в visual/cases/ и заменить <span class="thumb-ph"> на
+            <img src="visual/cases/имя.jpg" alt="...">.
+         Карточки без кейса смотрятся самодостаточно – ссылка появляется только когда страница готова. -->
+
+    <div class="work-group reveal">
+      <h3>Landing pages <span>[ featured ]</span></h3>
+      <div class="work-grid">
+        <a class="work-card" href="https://xenaja.github.io/kochevnik/" target="_blank" rel="noopener">
+          <div class="work-thumb"><img src="visual/cases/kochevnik-thumb.jpg" alt="Landing page for the Kochevnik ensemble" loading="lazy"></div>
+          <div class="work-body">
+            <div class="work-tags"><span>landing</span><span>ensemble</span><span>creative</span></div>
+            <div class="res">A bright, modern site for a song-and-dance ensemble – to convey the atmosphere.</div>
+            <span class="work-more">view site →</span>
+          </div>
+        </a>
+        <a class="work-card" href="https://kutkevich.ru" target="_blank" rel="noopener">
+          <div class="work-thumb"><img src="visual/cases/kutkevich-thumb.jpg" alt="Landing page for the KUTKEVICH chocolate producer" loading="lazy"></div>
+          <div class="work-body">
+            <div class="work-tags"><span>landing</span><span>chocolate</span><span>B2B</span></div>
+            <div class="res">A selling B2B site for a chocolate producer – to reflect the brand.</div>
+            <span class="work-more">view site →</span>
+          </div>
+        </a>
+        <a class="work-card" href="https://polina-dudnikova.ru" target="_blank" rel="noopener">
+          <div class="work-thumb"><img src="visual/cases/polina-thumb.jpg" alt="Landing page for psychologist Polina Dudnikova" loading="lazy"></div>
+          <div class="work-body">
+            <div class="work-tags"><span>landing</span><span>psychologist</span><span>expert</span></div>
+            <div class="res">A clear, calm calling-card site for a psychologist – to build trust.</div>
+            <span class="work-more">view site →</span>
+          </div>
+        </a>
+        <!-- Анастасия Анохина – скрыта, добавить позже. Ассеты готовы:
+             visual/cases/anastasia-thumb.jpg, anastasia.webp, cases/anastasia.html -->
+
+      </div>
+    </div>
+
+    <div class="work-group reveal">
+      <h3>Chatbots <span>[ featured ]</span></h3>
+      <div class="work-grid">
+        <div class="work-card">
+          <div class="work-thumb chat-thumb">
+            <div class="mini-chat">
+              <div class="b bot">Hi! Which meet-up is the ticket for?</div>
+              <div class="b user">Moscow, for Saturday</div>
+              <div class="b bot">Payment received ✅ Your ticket is already in the chat</div>
+            </div>
+          </div>
+          <div class="work-body">
+            <div class="work-tags"><span>chatbot</span><span>tickets</span><span>VK</span></div>
+            <div class="work-name">Aroma meet-up bot</div>
+            <div class="work-desc">Registration and ticket sales for meet-ups in three cities – with payment and automatic ticket generation right inside the bot.</div>
+            <span class="work-status">happy to show it live on request</span>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="work-thumb chat-thumb">
+            <div class="mini-chat">
+              <div class="b bot">Take a short quiz – we'll pick the format</div>
+              <div class="b user">Done 👍</div>
+              <div class="b bot">Payment ✅ Materials and club access are open</div>
+            </div>
+          </div>
+          <div class="work-body">
+            <div class="work-tags"><span>chatbot</span><span>payment</span><span>club</span></div>
+            <div class="work-name">Bot for selling a guide and a private club</div>
+            <div class="work-desc">Quiz, expert video, payment and auto-access to a private club with materials – with recurring payments.</div>
+            <span class="work-status">happy to show it live on request</span>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="work-thumb chat-thumb">
+            <div class="mini-chat">
+              <div class="b bot">Anahata Yoga Fest 🧘 How can I help?</div>
+              <div class="b user">Tickets and accommodation</div>
+              <div class="b bot">Ticket paid ✅ Already in your chat</div>
+            </div>
+          </div>
+          <div class="work-body">
+            <div class="work-tags"><span>chatbot</span><span>festival</span><span>VK + Telegram</span></div>
+            <div class="work-name">Anahata Yoga Fest bot</div>
+            <div class="work-desc">A large festival bot: menu, quiz, prices, FAQ, contact with a manager and tickets with payment – multi-channel across VK and Telegram.</div>
+            <span class="work-status">happy to show it live on request</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-group reveal">
+      <h3>Apps</h3>
+      <div class="work-grid two">
+        <a class="work-card" href="cases/telo-pomnit.html">
+          <div class="work-thumb app-thumb"><img src="visual/cases/telo-cover.jpg" alt="The Body Remembers app – body map" loading="lazy"></div>
+          <div class="work-body">
+            <div class="work-tags"><span>app</span><span>TG mini app</span><span>psychology</span></div>
+            <div class="work-name">"The Body Remembers" – Mini App</div>
+            <div class="work-desc">An app for an online body-therapy program: a body journal, an AI assistant, analytics. A program of Zoom sessions became a product with measurable results.</div>
+            <span class="work-more">view case →</span>
+          </div>
+        </a>
+        <a class="work-card" href="cases/fuelmonitor.html">
+          <div class="work-thumb app-thumb"><img src="visual/cases/fuel-cover.jpg" alt="FuelMonitor – platform dashboard" loading="lazy"></div>
+          <div class="work-body">
+            <div class="work-tags"><span>app</span><span>platform</span><span>integrations</span></div>
+            <div class="work-name">FuelMonitor – fuel control</div>
+            <div class="work-desc">We merged two independent accounting systems with no shared key into a single picture – discrepancies show up automatically. Multi-tenant, 350+ automated tests, in production.</div>
+            <span class="work-more">view case →</span>
+          </div>
+        </a>
+      </div>
+      <p class="apps-note">I build complex apps <strong>in partnership with a developer</strong>: I own the product, the meaning and the positioning; my partner handles the server side, databases and complex logic. We take on products where what's under the hood matters as much as the cover.</p>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span>landing pages</span><i>//</i><span>chatbots</span><i>//</i><span>payments</span><i>//</i><span>integrations</span><i>//</i><span>admin panel</span><i>//</i><span>marketing</span><i>//</i><span>design</span><i>//</i><span>from 2 days</span><i>//</i>
+    <span>landing pages</span><i>//</i><span>chatbots</span><i>//</i><span>payments</span><i>//</i><span>integrations</span><i>//</i><span>admin panel</span><i>//</i><span>marketing</span><i>//</i><span>design</span><i>//</i><span>from 2 days</span><i>//</i>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">testimonials</span>
+      <h2>What clients say</h2>
+    </div>
+    <div class="quotes">
+      <div class="quote reveal"><span class="mark">”</span><p>I want to thank Ksenia for the careful work on the style and the details, and for her patience with my pace and wishes. She took in all my hopes for the design and the meaning – and at the same time, <strong>as a professional, made sure the site was modern and up to date</strong>. I sincerely recommend her.</p><div class="who"><div class="ava">PD</div><div><b>Polina Dudnikova</b><small>psychologist</small></div></div></div>
+      <div class="quote reveal"><span class="mark">”</span><p>The site turned out even better than I could have imagined! Beautiful visuals, all my wishes taken into account. You're easy to work with – even when I struggled to put my request into words, you caught it all on the fly. <strong>I'm getting compliments from colleagues about the new landing page.</strong></p><div class="who"><div class="ava">AA</div><div><b>Anastasia Anokhina</b><small>creative-states trainer</small></div></div></div>
+      <div class="quote reveal"><span class="mark">”</span><p>In working with Ksenia I can note real professionalism in IT – in particular, setting up payment systems tied to a selling bot. Overall everything was excellent: <strong>both the process and the result were a pleasure, only positive impressions remained</strong>. I'd be glad to keep working together. Recommended.</p><div class="who"><div class="ava">D</div><div><b>Denis</b><small>conference organizer</small></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="myths">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">common doubts</span>
+      <h2>A few things people worry about for nothing</h2>
+    </div>
+    <div class="myth-list">
+      <div class="myth reveal">
+        <div class="tag">Custom code is expensive</div>
+        <div class="ans">Not necessarily. Modern development tools speed things up a lot, so a coded site today is comparable in price to a good platform build – and often works out cheaper, because you're not paying a monthly subscription to a website builder.</div>
+      </div>
+      <div class="myth reveal">
+        <div class="tag">It takes a long time</div>
+        <div class="ans">A landing page – from two days. I don't spend days hand-building every block: I use a modern approach that gives speed without losing quality or control.</div>
+      </div>
+      <div class="myth reveal">
+        <div class="tag">I'll be tied to one developer</div>
+        <div class="ans">Quite the opposite. The code stays yours and any developer can maintain it. And so you can change the content yourself with peace of mind, I build a convenient admin panel – you're not tied to me in any way.</div>
+      </div>
+      <div class="myth reveal">
+        <div class="tag">Nothing can be changed without a programmer</div>
+        <div class="ans">You'll be able to. Everything you plan to change regularly – prices, schedule, promos, cards – is surfaced in a simple control panel. Open it, edit, save.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="quiz-wrap reveal">
+      <div class="quiz-bar">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <span class="fname">code_or_platform.quiz</span>
+      </div>
+      <div class="quiz-body">
+        <span class="eyebrow">choice helper</span>
+        <h2>Is custom code really the right call? Let's find out in a minute</h2>
+        <p class="quiz-intro">A website or a bot can be built on a ready-made website builder or written in custom code. That affects speed, flexibility, uniqueness and how easy it is to make changes later. There's no single right answer – it all depends on your goal. Answer a couple of questions and I'll suggest what's best.</p>
+
+        <div class="q-progress"><span class="lbl">01 / 04</span><div class="track"><div class="fill"></div></div></div>
+
+        <div class="quiz-stage">
+          <div class="q-step active" data-step="0">
+            <div class="q-text">Will you often change the content yourself?</div>
+            <div class="q-opts">
+              <button class="q-opt" data-w="code">No, or rarely</button>
+              <button class="q-opt" data-w="admin">Yes, but the same type – schedule, prices, promos, cards</button>
+              <button class="q-opt" data-w="platform">Yes, constantly and in different ways</button>
+            </div>
+          </div>
+          <div class="q-step" data-step="1">
+            <div class="q-text">What matters more to you?</div>
+            <div class="q-opts">
+              <button class="q-opt" data-w="code">A unique look and fast load speed</button>
+              <button class="q-opt" data-w="platform">Full independence in making edits</button>
+            </div>
+          </div>
+          <div class="q-step" data-step="2">
+            <div class="q-text">Do you need non-standard features, animations, integrations?</div>
+            <div class="q-opts">
+              <button class="q-opt" data-w="code">Yes, they're essential</button>
+              <button class="q-opt" data-w="platform">No, it's all fairly standard</button>
+            </div>
+          </div>
+          <div class="q-step" data-step="3">
+            <div class="q-text">Is this for the long term or a quick idea check?</div>
+            <div class="q-opts">
+              <button class="q-opt" data-w="code">I'm building it solidly, for the long term</button>
+              <button class="q-opt" data-w="platform">A quick idea check</button>
+            </div>
+          </div>
+
+          <div class="q-result" data-result>
+            <span class="badge" data-badge></span>
+            <h3 data-title></h3>
+            <p data-desc></p>
+            <div class="extra" data-extra></div>
+            <a href="#final" class="btn btn-primary">Discuss your project</a>
+            <button class="q-restart" data-restart>start over</button>
+          </div>
+        </div>
+
+        <p class="quiz-foot">I won't talk you into code if you don't need it. This is about your goal, not my gain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">pricing</span>
+      <h2>What it costs</h2>
+    </div>
+    <div class="price-grid">
+      <div class="price reveal">
+        <div class="term">from 2 days</div>
+        <h3>Landing pages</h3>
+        <ul class="lines">
+          <li><span>Business-card site</span><b>from $500</b></li>
+          <li><span>Full landing page</span><b>from $900</b></li>
+        </ul>
+      </div>
+      <div class="price reveal">
+        <div class="term">from 2 days</div>
+        <h3>Chatbots</h3>
+        <ul class="lines">
+          <li><span>Custom development</span><b>from $700</b></li>
+        </ul>
+      </div>
+      <div class="price reveal">
+        <div class="term">with a developer partner</div>
+        <h3>Apps</h3>
+        <p class="note">We discuss the cost individually for each project.</p>
+      </div>
+    </div>
+    <p class="price-foot reveal">The final price depends on complexity. I'll name it after a short conversation about your goal – no surprises at the end.</p>
+  </div>
+</section>
+
+<section class="process">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">process</span>
+      <h2>How we work</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="n">01</div><div><h3>Get acquainted</h3><p>You tell me about the task. A brief isn't required.</p></div></div>
+      <div class="step reveal"><div class="n">02</div><div><h3>Frame it</h3><p>I ask questions and help figure out what you actually need and what result we'll count as success.</p></div></div>
+      <div class="step reveal"><div class="n">03</div><div><h3>Build it</h3><p>Structure, copy, visuals – based on your materials or from scratch.</p></div></div>
+      <div class="step reveal"><div class="n">04</div><div><h3>Show and refine</h3><p>I show a working version and make edits until you're happy with the result.</p></div></div>
+      <div class="step reveal"><div class="n">05</div><div><h3>Launch</h3><p>I publish, set everything up, hand over the admin panel and all access. I stay in touch for support.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">before we start</span>
+      <h2>What people usually ask before we begin</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary>What if I don't like the result?</summary>
+        <div class="faq-body">I show the work in stages, not "everything at the end". Edits until you're happy with the version are part of the work, not an extra charge. And before we start we agree on the direction, so we don't head the wrong way.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>I don't have a brief and I don't understand the technical side – will it work?</summary>
+        <div class="faq-body">Yes, that's a common situation. I ask questions and help figure out what you actually need. From you – tell me about the business and the task; I'll translate the rest into plain language.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>How does payment work?</summary>
+        <div class="faq-body">Simple: 50% upfront, 50% on completion. I name the final price before we start, after a short conversation – with no "along-the-way" surcharges.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>What happens after launch?</summary>
+        <div class="faq-body">I hand over the access and, if needed, a simple admin panel – and I stay in touch for support. Small fixes after launch are not a problem.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<div class="ticker rev" aria-hidden="true">
+  <div class="ticker__track">
+    <span>meaning</span><i>//</i><span>design</span><i>//</i><span>copy</span><i>//</i><span>structure</span><i>//</i><span>payment</span><i>//</i><span>integrations</span><i>//</i><span>launch</span><i>//</i><span>support</span><i>//</i>
+    <span>meaning</span><i>//</i><span>design</span><i>//</i><span>copy</span><i>//</i><span>structure</span><i>//</i><span>payment</span><i>//</i><span>integrations</span><i>//</i><span>launch</span><i>//</i><span>support</span><i>//</i>
+  </div>
+</div>
+
+<section class="final" id="final">
+  <div class="wrap">
+    <div class="final-box reveal">
+      <h2>Tell me about your project</h2>
+      <p>A finished brief isn't required – I'll help frame what you need and name the timeline and price after a short conversation.</p>
+
+      <form class="lead-form" id="leadForm" novalidate>
+        <div class="field">
+          <label for="lf-name">What's your name</label>
+          <input type="text" id="lf-name" name="name" placeholder="Name" required maxlength="80" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="lf-contact">Where to reply</label>
+          <input type="text" id="lf-contact" name="contact" placeholder="@telegram, phone or email" required maxlength="120">
+        </div>
+        <div class="field">
+          <label for="lf-task">A few words about your project <span style="opacity:.6">– optional</span></label>
+          <textarea id="lf-task" name="task" placeholder="What would you like to do? A short note is fine." maxlength="1500"></textarea>
+        </div>
+        <!-- ловушка для ботов: люди это поле не видят и не заполняют -->
+        <div class="hp" aria-hidden="true"><label>Do not fill this in<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+        <label class="consent">
+          <input type="checkbox" name="consent" required>
+          <span>I agree to the processing of my personal data and accept the <a href="privacy.html" target="_blank" rel="noopener">privacy policy</a>.</span>
+        </label>
+        <button type="submit" class="btn btn-primary" id="lf-submit">Send request</button>
+        <div class="form-status" id="lf-status" role="status" aria-live="polite"></div>
+      </form>
+
+      <div class="form-alt">or directly:</div>
+      <div class="contacts">
+        <a href="https://t.me/xenaja" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://max.ru/u/f9LHodD0cOJTVLXe2gnpTKfQN7R8Ip9QjH6rJuq8LmNkouHu-QHuH1rgEe8" target="_blank" rel="noopener">MAX</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<a href="#final" class="sticky-cta">Discuss your project</a>
+<button type="button" class="to-top" aria-label="Back to top">↑</button>
+
+<footer>
+  <div class="wrap">© <span id="yr"></span> · built with care for results · <a href="privacy.html">Privacy policy</a></div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* Hero: эффект печати подзаголовка (с уважением к prefers-reduced-motion) */
+  (function(){
+    const el = document.querySelector('.hero .lead .type');
+    if (!el) return;
+    let reduce = false;
+    try { reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e){}
+    if (reduce) return; // оставляем текст как есть, без анимации
+    const full = el.textContent;
+    el.textContent = '';
+    let i = 0;
+    const tick = () => {
+      el.textContent = full.slice(0, i);
+      if (i++ < full.length) setTimeout(tick, 36);
+    };
+    setTimeout(tick, 560); // старт после появления подзаголовка в каскаде
+  })();
+
+  /* Видео «обо мне»: пауза при prefers-reduced-motion – остаётся постер */
+  (function(){
+    const v = document.querySelector('.about-video');
+    if (!v) return;
+    let reduce = false;
+    try { reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e){}
+    if (reduce) return; // оставляем постер, без автопроигрывания
+    // ленивый автоплей: грузим и запускаем видео только когда блок «обо мне» в зоне видимости
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((ents) => {
+        ents.forEach((e) => { if (e.isIntersecting) { v.play().catch(() => {}); io.unobserve(v); } });
+      }, { threshold: 0.25 });
+      io.observe(v);
+    } else { v.play().catch(() => {}); }
+  })();
+
+  /* Scroll-reveal через IntersectionObserver */
+  (function(){
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+  })();
+
+  /* Квиз «код или платформа» */
+  (function(){
+    const steps = document.querySelectorAll('.q-step');
+    const stage = document.querySelector('.quiz-stage');
+    const resultEl = stage.querySelector('[data-result]');
+    const fill = document.querySelector('.q-progress .fill');
+    const lbl = document.querySelector('.q-progress .lbl');
+    const total = steps.length;
+    let current = 0;
+    const scores = { code: 0, platform: 0, admin: 0 };
+
+    const results = {
+      code: {
+        badge: 'Likely code',
+        title: 'Custom development is the way to go for you',
+        desc: 'Your case is about uniqueness, speed and flexibility. With code you get a fast site without a builder’s limits, and you can grow without rebuilding from scratch.',
+        extra: 'We’ll go over the details and pick a solution precisely for your goal.'
+      },
+      platform: {
+        badge: 'Likely a platform',
+        title: 'A website builder may be more convenient for you',
+        desc: 'If what matters most is changing everything yourself and checking the idea quickly – a ready-made platform can do the job. And that’s perfectly fine.',
+        extra: 'Honestly: I won’t push you toward code. I work in code myself and don’t build on website builders – but I’ll tell you if it’s enough for your goal.'
+      },
+      admin: {
+        badge: 'Code + admin panel',
+        title: 'Code won’t get in your way – quite the opposite',
+        desc: 'You want to change content yourself, but it’s the same type: schedule, prices, promos, cards. That’s no reason to move to a website builder.',
+        extra: 'I’ll build a convenient admin panel, and you’ll calmly change everything yourself, while the site stays coded – fast and without limits.'
+      },
+      both: {
+        badge: 'Both options',
+        title: 'You have a choice',
+        desc: 'By your answers, both paths work. Here it’s worth going by budget, deadlines and future plans.',
+        extra: 'Let’s talk – I’ll pick an option for your goals and your wallet, no pressure.'
+      }
+    };
+
+    function showStep(i){
+      steps.forEach(s => s.classList.toggle('active', +s.dataset.step === i));
+      fill.style.width = ((i+1)/total*100) + '%';
+      lbl.textContent = '0'+(i+1)+' / 0'+total;
+    }
+
+    function finish(){
+      steps.forEach(s => s.classList.remove('active'));
+      fill.style.width = '100%';
+      lbl.textContent = 'done';
+      let key;
+      if (scores.admin > 0 && scores.platform <= 1) key = 'admin';
+      else if (scores.code > scores.platform) key = 'code';
+      else if (scores.platform > scores.code) key = 'platform';
+      else key = 'both';
+      const r = results[key];
+      resultEl.querySelector('[data-badge]').textContent = r.badge;
+      resultEl.querySelector('[data-title]').textContent = r.title;
+      resultEl.querySelector('[data-desc]').textContent = r.desc;
+      resultEl.querySelector('[data-extra]').textContent = r.extra;
+      resultEl.classList.add('active');
+    }
+
+    stage.querySelectorAll('.q-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const w = btn.dataset.w;
+        if (w === 'admin') { scores.admin++; scores.code++; }
+        else scores[w]++;
+        current++;
+        if (current < total) showStep(current);
+        else finish();
+      });
+    });
+
+    resultEl.querySelector('[data-restart]').addEventListener('click', () => {
+      current = 0; scores.code = 0; scores.platform = 0; scores.admin = 0;
+      resultEl.classList.remove('active');
+      showStep(0);
+    });
+  })();
+
+  /* LEAD FORM → Telegram.
+     Заявка уходит POST-запросом на ваш эндпоинт, который пересылает её в Telegram.
+     Подставьте URL Cloudflare Worker (инструкция – в FORM-SETUP.md). */
+  (function(){
+    const ENDPOINT = 'https://lead-form.xenonline77.workers.dev';
+    const form = document.getElementById('leadForm');
+    if (!form) return;
+    const btn = document.getElementById('lf-submit');
+    const status = document.getElementById('lf-status');
+
+    function setStatus(msg, type){ status.textContent = msg; status.className = 'form-status' + (type ? ' ' + type : ''); }
+
+    // мягкая проверка контакта: email, телефон (10–15 цифр) или @telegram / t.me-ссылка
+    function isValidContact(v){
+      v = v.trim();
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return true;                 // email
+      if (/(t\.me\/|telegram\.me\/)[a-zA-Z0-9_]{3,}/i.test(v)) return true;     // ссылка t.me
+      if (/^@[a-zA-Z0-9_]{4,}$/.test(v)) return true;                          // @username
+      const digits = v.replace(/\D/g, '');
+      if (digits.length >= 10 && digits.length <= 15) return true;            // телефон
+      return false;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      setStatus('');
+
+      // honeypot: если бот заполнил скрытое поле – тихо «успех», ничего не шлём
+      if (form.company.value.trim()) { setStatus('Thank you! I’ll be in touch soon.', 'ok'); form.reset(); return; }
+
+      const name = form.name.value.trim();
+      const contact = form.contact.value.trim();
+      const task = form.task.value.trim();
+      if (!name || !contact) { setStatus('Please fill in your name and contact.', 'err'); return; }
+      if (!isValidContact(contact)) { setStatus('Please check the contact: leave a phone, email or @telegram.', 'err'); return; }
+      if (!form.consent.checked) { setStatus('Please tick the consent to process personal data.', 'err'); return; }
+
+      btn.disabled = true;
+      const oldLabel = btn.textContent;
+      btn.textContent = 'Sending…';
+      try {
+        const res = await fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, contact, task, page: location.href })
+        });
+        if (!res.ok) throw new Error('bad status ' + res.status);
+        form.reset();
+        setStatus('Thank you! Your request has been sent – I’ll be in touch soon.', 'ok');
+      } catch (err) {
+        setStatus('Couldn’t send. Message me directly on Telegram: @xenaja', 'err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = oldLabel;
+      }
+    });
+  })();
+
+  /* Спотлайт за курсором на карточках */
+  (function(){
+    try { if (matchMedia('(hover: none)').matches) return; } catch(e){} // на тач-устройствах не нужно
+    document.querySelectorAll('.card, .price, .quote, .step, .faq-item').forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+  })();
+
+  /* Меню (мобильный гамбургер) */
+  (function(){
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.getElementById('navlinks');
+    if (!toggle || !links) return;
+    function setOpen(open){
+      links.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      document.body.classList.toggle('menu-open', open);
+    }
+    toggle.addEventListener('click', () => setOpen(!links.classList.contains('open')));
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+  })();
+
+  /* Кнопка «наверх» */
+  (function(){
+    const btn = document.querySelector('.to-top');
+    if (!btn) return;
+    const onScroll = () => btn.classList.toggle('show', window.scrollY > 600);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    let smooth = true;
+    try { smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e){}
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' }));
+  })();
+
+  /* Scroll-spy: подсветка активного пункта меню */
+  (function(){
+    if (!('IntersectionObserver' in window)) return;
+    const linkFor = {};
+    document.querySelectorAll('.nav-links a').forEach((a) => {
+      const href = a.getAttribute('href') || '';
+      if (href.startsWith('#') && href.length > 1) linkFor[href.slice(1)] = a;
+    });
+    const sections = ['about','works','pricing'].map((id) => document.getElementById(id)).filter(Boolean);
+    if (!sections.length) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const a = linkFor[e.target.id];
+        if (!a) return;
+        Object.values(linkFor).forEach((l) => l.classList.remove('active'));
+        a.classList.add('active');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach((s) => io.observe(s));
+  })();
+</script>
+
+</body>
+</html>

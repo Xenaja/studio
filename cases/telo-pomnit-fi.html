@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>"The Body Remembers" – Telegram Mini App · case · Ksenia</title>
+<meta name="description" content="Case: Telegram Mini App verkossa toimivalle kehoterapiaohjelmalle 'The Body Remembers'. Kehopäiväkirja, tekoälyavustaja, analytiikka – Zoom-tapaamisista koostunut ohjelma muuttui tuotteeksi, jolla on mitattava tulos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0f0e0c; --bg-2:#14120f; --panel:#181610; --panel-2:#1d1b14;
+    --line:rgba(94,234,212,0.12); --line-soft:rgba(245,240,225,0.08);
+    --ink:#f3efe2; --ink-soft:#b6b0a0; --ink-faint:#7d776a;
+    --accent:#5eead4; --accent-dim:#3fbfac; --accent-glow:rgba(94,234,212,0.42);
+    --display:'Familjen Grotesk',system-ui,sans-serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --container:880px; --radius:16px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.7; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:var(--container); margin:0 auto; padding:0 22px; }
+  a { color:var(--accent); }
+  .back { display:inline-block; margin:32px 0 8px; font-family:var(--mono); font-size:0.85rem; color:var(--ink-faint); text-decoration:none; }
+  .back:hover { color:var(--accent); }
+
+  .eyebrow { font-family:var(--mono); font-size:0.72rem; letter-spacing:0.05em; color:var(--accent); }
+  .eyebrow::before { content:"// "; opacity:0.6; }
+  .tags { display:flex; flex-wrap:wrap; gap:7px; margin:14px 0 0; }
+  .tags span { font-family:var(--mono); font-size:0.66rem; color:var(--accent); border:1px solid var(--line); border-radius:100px; padding:4px 10px; }
+
+  h1 { font-family:var(--display); font-weight:600; font-size:clamp(1.9rem,5vw,2.9rem); line-height:1.1; letter-spacing:-0.01em; margin:18px 0 0; }
+  .meta { display:flex; flex-wrap:wrap; gap:18px; margin-top:22px; font-family:var(--mono); font-size:0.8rem; color:var(--ink-soft); }
+  .meta b { color:var(--ink); font-weight:500; }
+
+  section.case { padding:38px 0; border-bottom:1px solid var(--line-soft); }
+  section.case:last-of-type { border-bottom:none; }
+  h2 { font-family:var(--display); font-weight:600; font-size:1.45rem; margin-bottom:14px; }
+  p { color:var(--ink-soft); margin-bottom:14px; }
+  p strong, li strong { color:var(--ink); font-weight:600; }
+  .lead-p { font-size:1.08rem; }
+
+  /* список болей */
+  .pains { list-style:none; display:grid; gap:10px; }
+  .pains li { padding-left:22px; position:relative; color:var(--ink-soft); }
+  .pains li::before { content:"→"; position:absolute; left:0; color:var(--accent); }
+
+  /* что внутри – фичи */
+  .feat { list-style:none; display:grid; gap:12px; margin-top:6px; }
+  @media (min-width:640px){ .feat { grid-template-columns:1fr 1fr; } }
+  .feat li { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:15px 17px; }
+  .feat b { color:var(--ink); font-weight:600; display:block; }
+  .feat span { display:block; color:var(--ink-soft); font-size:0.9rem; margin-top:4px; line-height:1.45; }
+
+  /* результаты – чеклист */
+  .checks { list-style:none; display:grid; gap:11px; }
+  .checks li { padding-left:28px; position:relative; color:var(--ink-soft); }
+  .checks li::before { content:"✓"; position:absolute; left:0; color:var(--accent); font-weight:700; }
+  .outcome { background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:12px; padding:18px 20px; margin-top:20px; color:var(--ink); font-family:var(--display); font-size:1.1rem; line-height:1.4; }
+
+  .shots { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .shots figure { margin:0; }
+  .shots img { width:100%; display:block; border:1px solid var(--line); border-radius:14px; box-shadow:0 14px 34px -18px rgba(0,0,0,0.85); }
+  .shots figcaption { margin-top:8px; font-family:var(--mono); font-size:0.72rem; color:var(--ink-faint); text-align:center; }
+  @media (min-width:640px){ .shots { grid-template-columns:repeat(3,1fr); gap:18px; } }
+
+  .cta { text-align:center; padding:54px 0 72px; }
+  .btn { display:inline-block; font-family:var(--body); font-weight:700; background:var(--accent); color:#06231f; padding:15px 30px; border-radius:12px; text-decoration:none; min-height:48px; }
+  .btn:hover { background:var(--accent-dim); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../fi.html#works">← kaikki työt</a>
+
+    <header style="padding:8px 0 26px;">
+      <span class="eyebrow">case</span>
+      <div class="tags"><span>sovellus</span><span>TG mini app</span><span>psykologia</span></div>
+      <h1>"The Body Remembers" – Telegram Mini App</h1>
+      <div class="meta">
+        <span>Rooli: <b>tuote ja positiointi</b></span>
+        <span>Kehitys: <b>yhteistyössä</b></span>
+        <span>Tila: <b>toteutettu</b></span>
+      </div>
+    </header>
+
+    <section class="case">
+      <h2>Mistä kaikki alkoi</h2>
+      <p class="lead-p">"The Body Remembers" on verkossa toimiva integratiivinen kehoterapiaohjelma: 5 viikkoa, 9 live-Zoom-tapaamista, suljettu ryhmä.</p>
+      <p>Ohjelma toimi ja tuloksia syntyi. Mutta yksi systeeminen ongelma söi niitä: <strong>tapaamisten välissä osallistujat "katosivat"</strong>. Tapaamisen oivallus haihtui parissa päivässä – ja seuraavaan tapaamiseen ihminen tuli kuin puhtaalta pöydältä. Ei laiskuudesta, vaan koska ei ollut työkalua, joka auttaisi jatkamaan työtä tapaamisten välissä.</p>
+      <ul class="pains">
+        <li>Kehopäiväkirjaa ei pidetty säännöllisesti – muistiinpanoja puhelimessa, joita kukaan ei lue.</li>
+        <li>Laukaisijat ja voimakkaat reaktiot katosivat – hetki meni ohi käsittelemättä.</li>
+        <li>Ohjaaja työskenteli sokkona – ilman tietoa siitä, mitä tapaamisten välissä tapahtui.</li>
+        <li>Tuloksista ei ollut konkreettista näyttöä tulevaa myyntiä varten.</li>
+        <li>Chat täyttyi toistuvista kysymyksistä: "missä on Zoom-linkki?", "mihin aikaan tapaaminen on?".</li>
+      </ul>
+    </section>
+
+    <section class="case">
+      <h2>Ratkaisu</h2>
+      <p><strong>Telegram Mini App – sovellus suoraan Telegramin sisällä.</strong> Se avautuu yhdellä painikkeella botissa: mitään ei tarvitse ladata, ei rekisteröitymistä, ei minnekään siirtymistä – osallistuja on jo Telegramissa, ja työkalu on siellä samassa.</p>
+      <p>Niille, jotka eivät vielä ole ryhmässä, sovellus näkyy mutta on lukittu – se luo suljetun klubin tunteen ja motivoi ostamaan.</p>
+    </section>
+
+    <section class="case">
+      <h2>Mitä sisällä on</h2>
+      <ul class="feat">
+        <li><b>Kehopäiväkirja</b><span>Interaktiivinen kehokartta: napauta aluetta, valitse tuntemus, lisää muistiinpano. Merkintähistoria + muistutukset botilta.</span></li>
+        <li><b>Päiväkirjan vienti PDF:ksi</b><span>Koko matka päivämäärittäin, alueittain ja tuntemuksittain – yhdellä klikkauksella. Konkreettinen näyttö työstä.</span></li>
+        <li><b>Stop-reaktioiden päiväkirja</b><span>Laukaisijoiden kirjaus: mitä tapahtui, mikä alue reagoi, voimakkuus 1–10, muistiinpano.</span></li>
+        <li><b>Tekoälyavustaja</b><span>Käsittele voimakas hetki tässä ja nyt, ilman että täytyy odottaa seuraavaa tapaamista.</span></li>
+        <li><b>Kaavojen diagnostiikka</b><span>Testi ohjelman alussa: osallistuja oppii oman käyttäytymiskaavansa stressissä.</span></li>
+        <li><b>Viikoittainen check-in kaavion kanssa</b><span>Lyhyt kuulumiskysely – viikoittainen kehitys rakentuu automaattisesti.</span></li>
+        <li><b>Ennen ja jälkeen -kyselyt</b><span>Mitattava tulos: millaista oli ennen, mikä muuttui jälkeen – markkinointia ja case-tarinoita varten.</span></li>
+        <li><b>Palautteet, aikataulu, chat</b><span>Palautteet suoraan ohjaajalle; kaikki päivämäärät ja Zoom-linkit; yhteys ryhmään ja ohjaajaan – sovelluksesta.</span></li>
+      </ul>
+    </section>
+
+    <section class="case">
+      <h2>Mitä ohjaaja sai</h2>
+      <ul class="checks">
+        <li>Osallistujat työskentelevät tapaamisten välissä – päiväkirja, stop-reaktiot, check-init.</li>
+        <li>Analytiikka jokaisesta: mikä sattui ennen ja mikä muuttui jälkeen.</li>
+        <li>Näyttö vaikuttavuudesta – numeroina ja merkintöinä, ei vain "tuli parempi olo".</li>
+        <li>Valmis markkinointimateriaali – ennen/jälkeen-kyselyt, palautteet, kehitys.</li>
+        <li>Chat on vapaa toistuvista kysymyksistä, eivätkä osallistujat enää katoa tapaamisten välissä.</li>
+      </ul>
+      <div class="outcome">Joukosta Zoom-tapaamisia tuli tuote, jolla on mitattava tulos. Sovellus ei korvaa ohjaajan työtä – se vahvistaa ja jatkaa sitä tapaamisten välissä.</div>
+    </section>
+
+    <section class="case">
+      <h2>Miltä se näyttää</h2>
+      <div class="shots">
+        <figure><img src="../visual/cases/telo-1.jpg" alt="The Body Remembers -sovellus – päiväkirjan päänäkymä" loading="lazy"><figcaption>Päiväkirja</figcaption></figure>
+        <figure><img src="../visual/cases/telo-2.jpg" alt="Kehokartta – jännitysalueen valinta" loading="lazy"><figcaption>Kehokartta</figcaption></figure>
+        <figure><img src="../visual/cases/telo-3.jpg" alt="Muutosten seuranta tilaliukusäätimillä" loading="lazy"><figcaption>Seuranta</figcaption></figure>
+        <figure><img src="../visual/cases/telo-4.jpg" alt="Oma matka – kaavojen diagnostiikka ja ryhmän tulokset" loading="lazy"><figcaption>Oma matka</figcaption></figure>
+        <figure><img src="../visual/cases/telo-5.jpg" alt="Oma ryhmä – ohjelman tulokset ja pääsy chattiin" loading="lazy"><figcaption>Oma ryhmä</figcaption></figure>
+      </div>
+    </section>
+
+    <div class="cta">
+      <a class="btn" href="../fi.html#final">Keskustellaan omasta sovelluksestasi</a>
+    </div>
+  </div>
+</body>
+</html>

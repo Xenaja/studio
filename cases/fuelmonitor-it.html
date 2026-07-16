@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FuelMonitor – piattaforma di controllo del carburante · case · Ksenia</title>
+<meta name="description" content="Case: la piattaforma FuelMonitor. Abbiamo unito due sistemi di contabilità indipendenti senza chiave comune in un'unica visione – entity resolution su dati sporchi, multi-tenant, oltre 350 test automatici, in produzione.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0f0e0c; --bg-2:#14120f; --panel:#181610; --panel-2:#1d1b14;
+    --line:rgba(94,234,212,0.12); --line-soft:rgba(245,240,225,0.08);
+    --ink:#f3efe2; --ink-soft:#b6b0a0; --ink-faint:#7d776a;
+    --accent:#5eead4; --accent-dim:#3fbfac; --accent-glow:rgba(94,234,212,0.42);
+    --display:'Familjen Grotesk',system-ui,sans-serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --container:880px; --radius:16px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.7; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:var(--container); margin:0 auto; padding:0 22px; }
+  a { color:var(--accent); }
+  .back { display:inline-block; margin:32px 0 8px; font-family:var(--mono); font-size:0.85rem; color:var(--ink-faint); text-decoration:none; }
+  .back:hover { color:var(--accent); }
+
+  .eyebrow { font-family:var(--mono); font-size:0.72rem; letter-spacing:0.05em; color:var(--accent); }
+  .eyebrow::before { content:"// "; opacity:0.6; }
+  .tags { display:flex; flex-wrap:wrap; gap:7px; margin:14px 0 0; }
+  .tags span { font-family:var(--mono); font-size:0.66rem; color:var(--accent); border:1px solid var(--line); border-radius:100px; padding:4px 10px; }
+
+  h1 { font-family:var(--display); font-weight:600; font-size:clamp(1.9rem,5vw,2.9rem); line-height:1.1; letter-spacing:-0.01em; margin:18px 0 0; }
+  .sub { font-family:var(--display); color:var(--ink-soft); font-size:1.15rem; margin-top:10px; }
+  .meta { display:grid; gap:8px; margin-top:22px; font-family:var(--mono); font-size:0.78rem; color:var(--ink-soft); }
+  .meta b { color:var(--ink); font-weight:500; }
+
+  section.case { padding:38px 0; border-bottom:1px solid var(--line-soft); }
+  section.case:last-of-type { border-bottom:none; }
+  h2 { font-family:var(--display); font-weight:600; font-size:1.45rem; margin-bottom:14px; }
+  p { color:var(--ink-soft); margin-bottom:14px; }
+  p strong, li strong { color:var(--ink); font-weight:600; }
+  .lead-p { font-size:1.08rem; }
+
+  /* технические вызовы */
+  .challenges { list-style:none; display:grid; gap:16px; }
+  .challenges li { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 20px; }
+  .challenges b { display:block; color:var(--ink); font-size:1.05rem; margin-bottom:7px; }
+  .challenges b .n { font-family:var(--mono); color:var(--accent); font-size:0.82rem; margin-right:9px; }
+  .challenges p { margin:0; font-size:0.95rem; }
+
+  /* результаты – чеклист */
+  .checks { list-style:none; display:grid; gap:11px; }
+  .checks li { padding-left:28px; position:relative; color:var(--ink-soft); }
+  .checks li::before { content:"✓"; position:absolute; left:0; color:var(--accent); font-weight:700; }
+
+  .means { list-style:none; display:grid; gap:12px; }
+  .means li { padding-left:22px; position:relative; color:var(--ink-soft); }
+  .means li::before { content:"▸"; position:absolute; left:0; color:var(--accent); }
+
+  .shots { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; align-items:start; }
+  .shots figure { margin:0; }
+  .shots img { width:100%; display:block; border:1px solid var(--line); border-radius:14px; box-shadow:0 14px 34px -18px rgba(0,0,0,0.85); }
+  .shots figcaption { margin-top:8px; font-family:var(--mono); font-size:0.72rem; color:var(--ink-faint); text-align:center; }
+  @media (min-width:640px){ .shots { grid-template-columns:repeat(3,1fr); gap:18px; } }
+
+  .cta { text-align:center; padding:54px 0 72px; }
+  .btn { display:inline-block; font-family:var(--body); font-weight:700; background:var(--accent); color:#06231f; padding:15px 30px; border-radius:12px; text-decoration:none; min-height:48px; }
+  .btn:hover { background:var(--accent-dim); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../it.html#works">← tutti i lavori</a>
+
+    <header style="padding:8px 0 26px;">
+      <span class="eyebrow">case · ingegneria</span>
+      <div class="tags"><span>app</span><span>piattaforma</span><span>integrazioni</span></div>
+      <h1>FuelMonitor – piattaforma di controllo del carburante</h1>
+      <p class="sub">Dai compiti di prodotto alle sfide ingegneristiche</p>
+      <div class="meta">
+        <span>Classe di problema: <b>integrazione di fonti indipendenti · entity resolution senza chiave comune · multi-tenant · dati "sporchi" da apparecchiature reali</b></span>
+        <span>Stack: <b>Python, Django, servizi in background (watchdog, scheduler), gunicorn + nginx, systemd</b></span>
+        <span>Ruolo: <b>in collaborazione</b> · Stato: <b>in produzione</b></span>
+      </div>
+    </header>
+
+    <section class="case">
+      <h2>La classe di problemi che questo progetto risolve</h2>
+      <p class="lead-p">Molti compiti aziendali si riducono a uno schema difficile: <strong>ci sono più sistemi indipendenti, ognuno conosce la propria parte di verità, e da nessuna parte quelle parti vengono riunite.</strong></p>
+      <p>I dati arrivano in formati diversi, da canali diversi, con errori di battitura e lacune – e un identificatore comune con cui collegarli semplicemente non esiste.</p>
+      <p>FuelMonitor è un esempio tipico. Due sistemi di contabilità indipendenti: uno sa <strong>quanta risorsa è stata erogata</strong>, l'altro – <strong>quanta è realmente arrivata al destinatario</strong>. Finché restano separati, lo scostamento non si può dimostrare. Li abbiamo riuniti in un'unica vista così che lo scostamento emerga automaticamente per ogni operazione.</p>
+    </section>
+
+    <section class="case">
+      <h2>Le sfide tecniche e come le abbiamo risolte</h2>
+      <ul class="challenges">
+        <li>
+          <b><span class="n">01</span>Entity resolution senza identificatore comune</b>
+          <p>Collegare i record di due sistemi che non hanno una chiave comune, con dati "sporchi" – errori di battitura, layout di tastiera diversi, duplicati, un identificatore sepolto in un altro campo. La soluzione è un <strong>algoritmo a più passaggi</strong>: corrispondenza esatta → corrispondenza fuzzy (tollerante agli errori) → recupero probabilistico da segnali indiretti. Il sistema non "ingoia" in silenzio le corrispondenze incerte – i casi dubbi vanno a un operatore per la conferma con un clic.</p>
+        </li>
+        <li>
+          <b><span class="n">02</span>Integrazioni che tengono conto di un mondo reale imperfetto</b>
+          <p>Due canali diversi: scambio di file in tempo reale (più formati, ripristino automatico dopo i guasti) e un'API esterna con limiti rigidi (suddivisione delle richieste, monitoraggio della quota, distinzione tra "nessun dato" ed "errore"). Ogni canale automatico ha un'alternativa manuale in caso di guasto.</p>
+        </li>
+        <li>
+          <b><span class="n">03</span>Multi-tenancy con isolamento garantito</b>
+          <p>Una singola istanza serve molti clienti in una gerarchia "partner → cliente". L'isolamento attraversa l'intero sistema a livello di architettura – non puoi vedere i dati altrui nemmeno modificando la barra degli indirizzi. È verificato da test automatici dedicati.</p>
+        </li>
+        <li>
+          <b><span class="n">04</span>Controllo della qualità dei dati come parte del prodotto</b>
+          <p>Il sistema segnala da sé i record sospetti in base a regole – l'operatore lavora su un elenco di problemi invece di controllare tutto. Anomalie e contraddizioni tra le fonti vengono evidenziate automaticamente.</p>
+        </li>
+        <li>
+          <b><span class="n">05</span>Prestazioni e affidabilità a volumi reali</b>
+          <p>L'elaborazione in batch ha velocizzato le importazioni di decine di volte (fondamentale con migliaia di operazioni al giorno). I ricalcoli pesanti vengono eseguiti solo in caso di modifiche reali. I passaggi chiave vengono registrati: nell'analisi degli incidenti è sempre chiaro dove e cosa è successo.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="case">
+      <h2>Il risultato</h2>
+      <ul class="checks">
+        <li>Fonti disparate vengono riunite in un'unica immagine – gli scostamenti emergono automaticamente per ogni operazione.</li>
+        <li>L'abbinamento senza chiave comune funziona su dati sporchi reali, con un controllo manuale integrato dei casi dubbi.</li>
+        <li>Le prestazioni reggono a volumi reali; l'isolamento dei dati è garantito a livello di architettura.</li>
+        <li>Oltre 350 test automatici (parser, algoritmi, controllo degli accessi, isolamento, scenari end-to-end), logging, pronto per l'uso su un server live.</li>
+      </ul>
+    </section>
+
+    <section class="case">
+      <h2>Com'è fatta</h2>
+      <div class="shots">
+        <figure><img src="../visual/cases/fuel-1.jpg" alt="Schermata di accesso di FuelMonitor" loading="lazy"><figcaption>Accesso</figcaption></figure>
+        <figure><img src="../visual/cases/fuel-2.jpg" alt="Dashboard della piattaforma di monitoraggio del carburante" loading="lazy"><figcaption>Dashboard</figcaption></figure>
+        <figure><img src="../visual/cases/fuel-3.jpg" alt="Filtri dati: periodo, cliente, fonte, ricerca" loading="lazy"><figcaption>Filtri dati</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="case">
+      <h2>Cosa significa per il tuo progetto</h2>
+      <p>FuelMonitor è un esempio del livello di complessità che affrontiamo. Realizziamo servizi web e piattaforme end to end – dai compiti di prodotto chiari a quelli in cui non esiste una soluzione pronta e architettura e algoritmi vanno progettati da zero.</p>
+      <ul class="means">
+        <li><strong>Progettiamo un'architettura</strong> che regge la crescita – più clienti, isolamento dei dati, volumi reali, affidabilità.</li>
+        <li><strong>Inventiamo algoritmi su misura</strong> – abbinamento, scoring, recupero delle lacune dove non esistono librerie pronte.</li>
+        <li><strong>Lo portiamo in produzione</strong> – con test, logging e funzionamento su un server live, non "una demo che funziona su dati puliti".</li>
+      </ul>
+      <p style="margin-top:16px;">Se hai un progetto – dalla routine a quello che altri non prendono – parliamone.</p>
+    </section>
+
+    <div class="cta">
+      <a class="btn" href="../it.html#final">Parliamo del tuo progetto</a>
+    </div>
+  </div>
+</body>
+</html>
